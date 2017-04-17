@@ -1888,6 +1888,603 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/src\/assets\/greensock-js-with-customease\/docs.html": {
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/docs.html",
+		"oF": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/getting_started.html": {
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/getting_started.html",
+		"oF": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/AttrPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/AttrPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/BezierPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/BezierPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/ColorPropsPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/ColorPropsPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/CSSPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/CSSPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/CSSRulePlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/CSSRulePlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/CustomEase.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/CustomEase.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/DirectionalRotationPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/DirectionalRotationPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/Draggable.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/Draggable.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/EaselPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/EaselPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/EasePack.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/EasePack.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/EndArrayPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/EndArrayPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/jquery.gsap.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/jquery.gsap.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/ModifiersPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/ModifiersPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/RaphaelPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/RaphaelPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/RoundPropsPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/RoundPropsPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/ScrollToPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/ScrollToPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TEMPLATE_Plugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TEMPLATE_Plugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TextPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TextPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TimelineLite.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TimelineLite.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TimelineMax.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TimelineMax.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TweenLite.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TweenLite.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TweenMax.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/commonjs-flat\/TweenMax.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/easing\/CustomEase.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 2,
+		"oAP": "\/dist\/js\/CustomEase.min.js",
+		"oF": 3,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/easing\/EasePack.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/easing\/EasePack.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/jquery.gsap.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/jquery.gsap.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/AttrPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/AttrPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/BezierPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/BezierPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/ColorPropsPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/ColorPropsPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/CSSPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/CSSPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/CSSRulePlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/CSSRulePlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/DirectionalRotationPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/DirectionalRotationPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/EaselPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/EaselPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/EndArrayPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/EndArrayPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/ModifiersPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/ModifiersPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/RaphaelPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/RaphaelPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/RoundPropsPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/RoundPropsPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/ScrollToPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/ScrollToPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/TextPlugin.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/TextPlugin.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/TimelineLite.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/TimelineLite.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/TimelineMax.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/TimelineMax.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/TweenLite.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/TweenLite.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/TweenMax.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/TweenMax.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/utils\/Draggable.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/utils\/Draggable.min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/easing\/CustomEase.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/easing\/CustomEase.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/easing\/EasePack.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/easing\/EasePack.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/jquery.gsap.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/jquery.gsap.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/AttrPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/AttrPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/BezierPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/BezierPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/ColorPropsPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/ColorPropsPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/CSSPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/CSSPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/CSSRulePlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/CSSRulePlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/DirectionalRotationPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/DirectionalRotationPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/EaselPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/EaselPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/EndArrayPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/EndArrayPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/ModifiersPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/ModifiersPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/RaphaelPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/RaphaelPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/RoundPropsPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/RoundPropsPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/ScrollToPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/ScrollToPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/TEMPLATE_Plugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/TEMPLATE_Plugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/TextPlugin.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/plugins\/TextPlugin.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/TimelineLite.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/TimelineLite.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/TimelineMax.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/TimelineMax.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/TweenLite.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/TweenLite.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/TweenMax.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/TweenMax.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/greensock-js-with-customease\/src\/uncompressed\/utils\/Draggable.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/uncompressed\/utils\/Draggable.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
 	"\/src\/assets\/GreenSock-ShockinglyGreen-js\/docs.html": {
 		"ft": 8192,
 		"oA": 1,
@@ -2504,7 +3101,7 @@
 	"displayValue": "dmss",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-angryBaby",
-	"lastBuiltDate": 514097400
+	"lastBuiltDate": 514125935
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
