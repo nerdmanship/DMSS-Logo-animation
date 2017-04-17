@@ -30,9 +30,9 @@
 		"eSQ": 1,
 		"ft": 4096,
 		"oA": 2,
-		"oAP": "\/dist\/README.html",
-		"oF": 0,
-		"oFM": 0,
+		"oAP": "\/dist\/README.md",
+		"oF": 2,
+		"oFM": 9,
 		"oS": 0,
 		"pHT": 0,
 		"pME": 1,
@@ -2504,7 +2504,7 @@
 	"displayValue": "dmss",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-angryBaby",
-	"lastBuiltDate": 514091574
+	"lastBuiltDate": 514097243
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,

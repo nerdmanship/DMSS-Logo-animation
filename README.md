@@ -2,6 +2,8 @@
 
 ## Made by [the Nerdmanship](https://nerdmanship.com/)
 
+### [Launch project](https://nerdmanship.github.io/DMSS-Logo-animation/dist)
+
 Contents
 * Modernizr
 * Normalizer
