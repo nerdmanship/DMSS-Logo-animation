@@ -1,14 +1,14 @@
-# Quick start web animation template for offline workflow
+# Website header logo animation for DMSS – Digital Marketing Skill Share
 
 ## Made by [the Nerdmanship](https://nerdmanship.com/)
 
 Contents
 * Modernizr
 * Normalizer
-* Jquery
 * GSAP TweenMax
+* GSAP MorphSVGPlugin
 
-Follow
+Follow Nerdmanship Custom
 * [Facebook](http://www.facebook.com/nerdmanship)
 * [Twitter](http://www.twitter.com/stromqvist)
 * [Dribbble](http://www.dribbble.com/nerdmanship)
