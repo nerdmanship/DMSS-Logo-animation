@@ -18,11 +18,8 @@ var o = {
   ],
   lists: [],
   data: {
-    eases: {
-      customEase: CustomEase.create("custom", "M0,0 C0.64,-5.29 0.9,0.23 1,1"),
-      customBack: CustomEase.create("custom", "M0,0,C0.068,0,0.128,-0.061,0.175,-0.081,0.224,-0.102,0.267,-0.107,0.315,-0.065,0.384,-0.004,0.449,0.253,0.465,0.323,0.505,0.501,0.509,0.602,0.548,0.779,0.576,0.908,0.702,1.026,0.82,1.026,0.924,1.026,0.938,0.998,1,1"),
-      customBack2: CustomEase.create("custom", "M0,0,C0.068,0,0.102,-0.056,0.175,-0.056,0.252,-0.056,0.402,0.253,0.418,0.323,0.458,0.501,0.462,0.602,0.501,0.779,0.529,0.908,0.702,1.014,0.82,1.014,0.924,1.014,0.938,0.998,1,1"),
-      customExpo: CustomEase.create("custom", "M0,0,C0.322,-0.15,0.466,0.292,0.498,0.502,0.532,0.73,0.586,0.88,0.64,0.928,0.679,0.962,0.698,1,1,1") 
+    // types: { section: { value: { } } },
+    easings: {
     },
     paths: {
       original: [
@@ -37,6 +34,32 @@ var o = {
         'M144 548c50.81 0 92-41.19 92-92s-41.19-92-92-92-92 41.19-92 92 41.19 92 92 92z',
         'M456 548c50.81 0 92-41.19 92-92s-41.19-92-92-92-92 41.19-92 92 41.19 92 92 92z'
       ]
+    },
+    positions: {
+      rectAnt: {
+        x: [ -50, 50, -50, 50 ],
+        y: [ -50, -50, 50, 50 ]
+      },
+      rectExp: {
+        x: [ -175, 175, -175, 175 ],
+        y: [ -175, -175, 175, 175 ]
+      },
+      charAnt: {
+        x: [ -50, 50, -50, 50 ],
+        y: [ -50, -50, 50, 50 ]
+      },
+      charCont: {
+        x: [ 100, -100, 100, -100 ],
+        y: [ 100, 100, -100, -100 ]
+      }
+    },
+    scales: {
+      rectAnt: [ 0.86, 0.83, 0.88, 0.8],
+      charCont: [ 0.7, 0.65, 0.8, 0.75 ]
+    },
+    colors: {
+      rects: [ "#4068B1", "#00BFE7", "#EF4223", "#D12368" ],
+      charCont: [ "hsl(200,100,100)", "hsl(200,100,97)", "hsl(200,100,92)", "hsl(200,100,94)" ]
     }
   },
   init: function() {
@@ -73,10 +96,13 @@ var o = {
   },
   // Settings
   settings: function() {
+    var allElements = [ o.el.rectD, o.el.rectM, o.el.rectS, o.el.rectS2, o.el.rects, o.el.charD, o.el.charM, o.el.charS, o.el.charS2, o.el.chars ];
+    TweenLite.set(allElements, { svgOrigin: "300, 300" });
+    
     TweenLite.defaultEase = Power1.easeInOut;
 
     o.setChars();
-    o.hide("chars");
+    o.hide();
     o.paint();
     o.resize();
     o.revealScene();
@@ -115,7 +141,7 @@ var o = {
     var i;
 
     for(i = 0; i < len; i++) {
-      TweenLite.set(rects[i], { fill: colors[i] });
+      TweenLite.set(rects[i], { fill: o.data.colors.rects[i] });
     }
   },
   resize: function() {
@@ -134,93 +160,91 @@ var o = {
   },
   start: function() {
     var master = o.getMasterTl();
-    master.play();
+    master.play().timeScale(0.5);
   },
   getMasterTl: function() {
-    var tl = new TimelineMax({ paused: true });
+    var tl = new TimelineMax({ paused: true, repeat: -1 });
+    var rectsTimeline = o.getRectsTl();
+    var charsTimeline = o.getCharsTl();
     
     tl
-      .add("start", 1)
-      .add(o.getCharsTl, "start")
-      .add(o.getRectsTl, "start")
+      .add(rectsTimeline, 1)
+      .add(charsTimeline, 1)
     ;
     
     return tl;
   },
   getRectsTl: function() {
-    var tl = new TimelineMax({ paused: false });
     
     var D = o.el.rectD;
     var M = o.el.rectM;
     var S = o.el.rectS;
     var S2 = o.el.rectS2;
-    var all = o.el.rects;
+    var group = o.el.rects;
+    var rects = [ D, M, S, S2 ];
 
-    var contractVal = 12;
-    var expandVal = 120;
-    var scaleVal = 0.7;
+    var tl = new TimelineMax({ paused: false });
 
     tl
-      .add("anticipate", 0)
-      .to(o.el.rects, 1, { rotation: -15, transformOrigin: "center", ease: Power1.easeInOut }, "anticipate")
-      .to(D, 0.8, { x: -50, y: -50, scale: 0.86, transformOrigin: "center", ease: Power1.easeInOut }, "anticipate =+0.1")
-      .to(M, 0.7, { x: 50, y: -50, scale: 0.83, transformOrigin: "center", ease: Power1.easeInOut }, "anticipate =+0.15")
-      .to(S, 1, { x: -50, y: 50, scale: 0.88, transformOrigin: "center", ease: Power1.easeInOut }, "anticipate")
-      .to(S2, 0.85, {x: 50, y: 50, scale: 0.8, transformOrigin: "center", ease: Power1.easeInOut }, "anticipate =+0.1")
+      .add("anticipation", 0)
+      .to(group, 1, { rotation: -15, ease: Power4.easeInOut }, "anticipation")
+      .staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectAnt.x, y: o.data.positions.rectAnt.y }, scale: o.data.scales.rectAnt, ease: Power4.easeInOut }, 0.05, "anticipation")
 
-      .add("spin", 1)
-      .to(o.el.rects, 1.4, { rotation: 315, transformOrigin: "center", ease: Power3.easeInOut }, "spin")
+      .add("spin")
+      .to(group, 1.3, { rotation: 315, ease: Power4.easeInOut }, "spin")
 
-      .add("expand", 1.15)
-      .to(D, 0.65, { x: -expandVal, y: -expandVal, scale: scaleVal, ease: Back.easeIn.config(7) }, "expand")
-      .to(M, 0.7, { x: expandVal, y: -expandVal, scale: scaleVal, ease: Back.easeIn.config(7) }, "expand")
-      .to(S, 0.7, { x: -expandVal, y: expandVal, scale: scaleVal, ease: Back.easeIn.config(7) }, "expand")
-      .to(S2, 0.65, { x: expandVal, y: expandVal, scale: scaleVal, ease: Back.easeIn.config(7) }, "expand")
-
-      .add("counterSpin", 2.4)
-      .to(o.el.rects, 5, { rotation: "-=15", transformOrigin: "center", ease: Linear.easeNone }, "counterSpin")
+      .add("expand", "anticipation =+1.3")
+      .staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectExp.x, y: o.data.positions.rectExp.y }, scale: 0.6, ease: Back.easeIn.config(5) }, 0, "expand")
       
-      .add("back", 7.4)
-      .to(o.el.rects, 0.7, { rotation: 360, transformOrigin: "center", ease: Back.easeInOut }, "straight")
-      .to(D, 0.74, { x: 0, y: 0, scale: 1, ease: Back.easeInOut.config(1) }, "straight")
-      .to(M, 0.8, { x: 0, y: 0, scale: 1, ease: Back.easeInOut.config(1) }, "straight")
-      .to(S, 0.77, { x: 0, y: 0, scale: 1, ease: Back.easeInOut.config(1) }, "straight")
-      .to(S2, 0.75, { x: 0, y: 0, scale: 1, ease: Back.easeInOut.config(1) }, "straight")      
+      .add("idle", "spin =+1.3")
+      .to(group, 5, { rotation: "-=15", ease: Linear.easeNone }, "idle")
+
+      .add("contraction")
+      .to(group, 0.8, { rotation: 360, ease: Power4.easeInOut }, "contraction")
+      .staggerTo(rects, 0.7, { x: 0, y: 0, scale: 1, ease: Back.easeInOut.config(1) }, 0.02, "contraction")
+      .set(group, { rotation: 0 })
     ;
     
     return tl;
   },
   getCharsTl: function() {
+
+    var D = o.el.charD;
+    var M = o.el.charM;
+    var S = o.el.charS;
+    var S2 = o.el.charS2;
+    var group = o.el.chars;
+    var chars = [ D, M, S, S2 ];
+
     var tl = new TimelineMax({ paused: false });
     
-    var positionVal = 130;
-    var scales = [ 0.7, 0.65, 0.8, 0.75 ];
-    var colors = [ "hsl(200,100,94)", "hsl(200,100,92)", "hsl(200,100,97)", "hsl(200,100,100)" ];
-
     tl
-      .add("move", 0)
-      .to(o.el.charD, 1.4, { x: positionVal, y: positionVal, scale: scales[0], transformOrigin: "center", ease: Back.easeInOut.config(4) }, "move")
-      .to(o.el.charM, 1.3, { x: -positionVal, y: positionVal, scale: scales[1], transformOrigin: "center", ease: Back.easeInOut.config(4) }, "move")
-      .to(o.el.charS, 1.2, { x: positionVal, y: -positionVal, scale: scales[2], transformOrigin: "center", ease: Back.easeInOut.config(4) }, "move")
-      .to(o.el.charS2, 1.3, { x: -positionVal, y: -positionVal, scale: scales[3], transformOrigin: "center", ease: Back.easeInOut.config(4) }, "move")
+      .add("anticipation")
+      .to(group, 1, { rotation: -15, ease: Power4.easeInOut }, "anticipation")
+      .staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charAnt.x, y: o.data.positions.charAnt.y }, scale: 0.8, ease: Power3.easeInOut }, 0, "anticipation")
+      
+      .add("spin")
+      .to(group, 1.2, { rotation: "+=480", ease: Power4.easeInOut }, "spin")
+      
+      .add("contraction", "spin =+0.5")
+      .staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charCont.x, y: o.data.positions.charCont.y }, ease: Back.easeOut.config(1) }, 0, "contraction")
+      .staggerTo(chars, 0.4, { cycle: { scale: o.data.scales.charCont }, ease: Back.easeOut.config(1) }, 0, "contraction")
+      .staggerTo(chars, 0.5, { cycle: { fill: o.data.colors.charCont } }, 0, "contraction")
+      .staggerTo(chars, 0.3, { cycle: { morphSVG: o.data.paths.morph } }, 0, "contraction")
 
-      .add("color", 0.5)
-      .to(o.el.charD, 0.5, { fill: colors[3] }, "color")
-      .to(o.el.charM, 0.5, { fill: colors[2] }, "color")
-      .to(o.el.charS, 0.5, { fill: colors[1] }, "color")
-      .to(o.el.charS2, 0.5, { fill: colors[0] }, "color")
-    
-      .add("morph", 0.8)
-      .to(o.el.charD, 0.3, { morphSVG: o.data.paths.morph[0] }, "morph")
-      .to(o.el.charM, 0.3, { morphSVG: o.data.paths.morph[1] }, "morph")
-      .to(o.el.charS, 0.3, { morphSVG: o.data.paths.morph[2] }, "morph")
-      .to(o.el.charS2, 0.3, { morphSVG: o.data.paths.morph[3] }, "morph")
-
-      // .add("spin", 0)
-      // .to(o.el.charD, 0.9, { rotation: 50, transformOrigin: "center", ease: Back.easeIn }, "spin")
-      // .to(o.el.charM, 0.9, { rotation: 110, transformOrigin: "center", ease: Back.easeIn }, "spin")
-      // .to(o.el.charS, 0.9, { rotation: 90, transformOrigin: "center", ease: Back.easeIn }, "spin")
-      // .to(o.el.charS2, 0.9, { rotation: 70, transformOrigin: "center", ease: Back.easeIn }, "spin")
+      .add("idle")
+      .staggerTo(chars, 5/4, { scale: "+=0.05", repeat: 2, yoyo: true }, 0.15, "idle")
+      .to(group, 5, { rotation: "+=100", ease: Linear.easeNone }, "idle")
+      
+      .add("morphBack")
+      .to(chars, 0.5, { fill: o.data.colors.charCont[0] }, "morphBack")
+      .staggerTo(chars, 0.3, { cycle: { morphSVG: o.data.paths.original }, rotation: 0 }, 0.05, "morphBack")
+      .staggerTo(chars, 0.5, { scale: 1 }, 0, "morphBack")
+     
+      .to(group, 0.7, { rotation: 720, ease: Back.easeInOut.config(1) }, "morphBack =+0")
+      .staggerTo(chars, 0.5, { x: 0, y: 0, ease: Back.easeOut.config(1) }, 0.01, "morphBack =+0.3")
+      
+      .set(group, { rotation: 0 })
     ;
     
     return tl;
