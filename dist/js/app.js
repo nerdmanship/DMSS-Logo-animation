@@ -136,7 +136,7 @@ var o = {
   },
   start: function start() {
     var master = o.getMasterTl();
-    master.play().timeScale(0.5);
+    master.play();
   },
   getMasterTl: function getMasterTl() {
     var tl = new TimelineMax({ paused: true, repeat: -1 });

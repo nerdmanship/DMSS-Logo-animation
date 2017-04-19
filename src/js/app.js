@@ -160,7 +160,7 @@ var o = {
   },
   start: function() {
     var master = o.getMasterTl();
-    master.play().timeScale(0.5);
+    master.play();
   },
   getMasterTl: function() {
     var tl = new TimelineMax({ paused: true, repeat: -1 });
