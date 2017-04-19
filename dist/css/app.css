@@ -431,10 +431,3 @@ template {
           transform: translate(-50%);
   margin-top: 100px;
   border: 1px solid blue; }
-
-svg.logoSVG {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  overflow: visible;
-  opacity: 0; }

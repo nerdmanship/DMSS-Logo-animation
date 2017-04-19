@@ -1,3 +1,27 @@
+class Particle {
+  
+  constructor(rect, rectIndex, particleIndex) {
+    this.target = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    this.target.setAttribute("data-dmss", "circle" + rectIndex + "0" + particleIndex);
+    this.target.setAttribute("cx", "300");
+    this.target.setAttribute("cy", "300");
+    this.target.setAttribute("r", "20");
+    this.target.setAttribute("fill", o.data.colors.rects[rectIndex]);
+
+    this.timeline = new TimelineMax({ repeat: -1});
+
+    this.timeline.to(this.target, 1, { scale: random(0.1,1), x: random(-300,300), y: random(-300,300) });
+    
+    // Make timeline
+  }
+
+  appendTo(parent) {
+    parent.appendChild(this.target);
+  }
+};
+
+
+
 var o = {
   name: "dmss",
   elements: [  
@@ -14,11 +38,15 @@ var o = {
     "charS",
     "charS2",
     "chars",
-    "rects"
+    "rects",
+    "particles"
   ],
   lists: [],
   data: {
     // types: { section: { value: { } } },
+    particles: {
+      count: 20
+    },
     easings: {
     },
     paths: {
@@ -63,10 +91,61 @@ var o = {
     }
   },
   init: function() {
+    o.createSVG();
     o.cacheDOM();
     o.settings();
     o.bindEvents();
     o.start();
+  },
+  createSVG: function() {
+    var rectNames = [ "rectS2", "rectS", "rectM", "rectD"];
+    var charNames = [ "charS2", "charS", "charM", "charD"];
+
+    var rectPaths = ['M312 312h288v288H312z', 'M0 312h288v288H0z', 'M312 0h288v288H312z', 'M0 0h288v288H0z'];
+
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+
+    document.querySelector(".logo-wrapper").appendChild(svg);
+
+    svg.setAttribute("data-dmss", "svg");
+    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svg.setAttribute("xlinkns", "http://www.w3.org/1999/xlink");
+    svg.setAttribute("viewBox", "0 0 600 600");
+    svg.setAttribute("style", "position: absolute; overflow: visible; opacity: 0;");
+
+    var particlesGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    var rectsGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    var charsGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    
+    svg.appendChild(particlesGroup);
+    svg.appendChild(rectsGroup);
+    svg.appendChild(charsGroup);
+
+    particlesGroup.setAttribute("data-dmss", "particles");
+    rectsGroup.setAttribute("data-dmss", "rects");
+    charsGroup.setAttribute("data-dmss", "chars");
+
+    var rectColors = Array.from(o.data.colors.rects);
+    var reversedColors = rectColors.reverse();
+
+    for (var i = 0; i < rectNames.length; i++) {
+      var rect = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      rect.setAttribute("data-dmss", rectNames[i]);
+      rect.setAttribute("d", rectPaths[i]);
+      rect.setAttribute("fill", reversedColors[i]);
+      rectsGroup.appendChild(rect);
+    }
+    
+    var characterPaths = Array.from(o.data.paths.original);
+    var reversedPaths = characterPaths.reverse();
+    
+    for (var i = 0; i < charNames.length; i++) {
+      var char = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      char.setAttribute("data-dmss", charNames[i]);
+      char.setAttribute("d", reversedPaths[i]);
+      char.setAttribute("fill", "#FFFFFF");
+      charsGroup.appendChild(char);
+    }
   },
   cacheDOM: function() {
     o.svg = document.querySelector("[data-" + o.name + "=svg]");
@@ -101,62 +180,14 @@ var o = {
     
     TweenLite.defaultEase = Power1.easeInOut;
 
-    o.setChars();
-    o.hide();
-    o.paint();
-    o.resize();
     o.revealScene();
-  },
-  setChars: function() {
-    var chars = [o.el.charD, o.el.charM, o.el.charS, o.el.charS2];
-    var len = chars.length;
-    var i;
-
-    for(i = 0; i < len; i++) {
-      TweenLite.set(chars[i], { fill: "#fff", attr: { d: o.data.paths.original[i] } });
-    }
-  },
-  hide: function(el) {
-    var hide;
-
-    if (el === "chars") {
-      hide = [o.el.charD, o.el.charM, o.el.charS, o.el.charS2];
-    } else if (el === "rects") {
-      hide = [o.el.rectD, o.el.rectM, o.el.rectS, o.el.rectS2];  
-    } else {
-      return;
-    }
-    
-    var len = hide.length;
-    var i;
-
-    for(i = 0; i < len; i++) {
-      TweenLite.set(hide[i], { autoAlpha: 0 });
-    }
-  },
-  paint: function() {
-    var colors = [ "#4068B1", "#00BFE7", "#EF4223", "#D12368" ];
-    var rects = [o.el.rectD, o.el.rectM, o.el.rectS, o.el.rectS2];
-    var len = rects.length;
-    var i;
-
-    for(i = 0; i < len; i++) {
-      TweenLite.set(rects[i], { fill: o.data.colors.rects[i] });
-    }
-  },
-  resize: function() {
-    o.vw = window.innerWidth;
-    o.vh = window.innerHeight;
-    console.log(o.vw + " " + o.vh);
   },
   revealScene: function() {
 
-      TweenMax.set(o.svg, { autoAlpha: 1 });
+      TweenMax.to(o.svg, 0.5, { autoAlpha: 1 });
   },
   // Bind events
   bindEvents: function() {
-
-    window.addEventListener("resize", o.resize);
   },
   start: function() {
     var master = o.getMasterTl();
@@ -195,6 +226,7 @@ var o = {
 
       .add("expand", "anticipation =+1.3")
       .staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectExp.x, y: o.data.positions.rectExp.y }, scale: 0.6, ease: Back.easeIn.config(5) }, 0, "expand")
+      .add(o.createParticles, "spin")
       
       .add("idle", "spin =+1.3")
       .to(group, 5, { rotation: "-=15", ease: Linear.easeNone }, "idle")
@@ -248,8 +280,21 @@ var o = {
     ;
     
     return tl;
+  },
+  createParticles: function() {
+    var rects = [ o.el.rectD, o.el.rectM, o.el.rectS, o.el.rectS2 ];
+    var count = o.data.particles.count;
+    var parent = o.el.particles;
+
+    rects.forEach(function(rect, rectIndex){
+      
+      for (var i = 0; i < count; i++) {
+        var particle = new Particle(rect, rectIndex, i);
+        particle.appendTo(parent);
+      }
+
+    });
   }
-  
 };
 
 window.addEventListener("load", o.init);
