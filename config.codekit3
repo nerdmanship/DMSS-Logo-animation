@@ -2200,9 +2200,9 @@
 	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/ModifiersPlugin.min.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 1,
-		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/ModifiersPlugin.min.js",
-		"oF": 1,
+		"oA": 2,
+		"oAP": "\/dist\/js\/ModifiersPlugin.min.js",
+		"oF": 3,
 		"sC": 1,
 		"tS": 1
 		},
@@ -2272,9 +2272,9 @@
 	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/TweenMax.min.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 1,
-		"oAP": "\/dist\/assets\/greensock-js-with-customease\/src\/minified\/TweenMax.min.js",
-		"oF": 1,
+		"oA": 2,
+		"oAP": "\/dist\/js\/TweenMax.min.js",
+		"oF": 3,
 		"sC": 1,
 		"tS": 1
 		},
@@ -2716,7 +2716,7 @@
 	"\/src\/assets\/GreenSock-ShockinglyGreen-js\/src\/minified\/TweenMax.min.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 2,
+		"oA": 1,
 		"oAP": "\/dist\/js\/TweenMax.min.js",
 		"oF": 3,
 		"sC": 1,

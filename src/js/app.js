@@ -2,23 +2,33 @@ class Particle {
   
   constructor(rect, rectIndex, particleIndex) {
     this.target = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    this.target.setAttribute("data-dmss", "circle" + rectIndex + "0" + particleIndex);
+    this.target.setAttribute("data-dmss", "circle" + rectIndex + particleIndex);
     this.target.setAttribute("cx", "300");
     this.target.setAttribute("cy", "300");
     this.target.setAttribute("r", "20");
     this.target.setAttribute("fill", o.data.colors.rects[rectIndex]);
-
-    this.timeline = new TimelineMax({ repeat: -1});
-
-    this.timeline.to(this.target, 1, { scale: random(0.1,1), x: random(-300,300), y: random(-300,300) });
     
-    // Make timeline
+    // normalise current index on index range -> 0-1
+    // multiply that with current rect X
+    var indexSq = Math.pow(particleIndex, 1.5);
+    var countSq = Math.pow(20, 1.5);
+
+    TweenMax.to(this.target, 10, { x: 0, repeat: -1, ease: Linear.easeNone,
+      modifiers: {
+        x: function() {
+          return (indexSq / countSq) * rect._gsTransform.x*2;
+        }
+      }
+    });
+
   }
 
   appendTo(parent) {
     parent.appendChild(this.target);
   }
-};
+}
+
+
 
 
 
@@ -39,7 +49,11 @@ var o = {
     "charS2",
     "chars",
     "rects",
-    "particles"
+    "particles",
+    "pContainer0",
+    "pContainer1",
+    "pContainer2",
+    "pContainer3"
   ],
   lists: [],
   data: {
@@ -47,7 +61,8 @@ var o = {
     particles: {
       count: 20
     },
-    easings: {
+    rotations: {
+      pContainer: [45, 315, 315, 45]
     },
     paths: {
       original: [
@@ -64,6 +79,10 @@ var o = {
       ]
     },
     positions: {
+      svg: {
+        midX: 300,
+        midY: 300
+      },
       rectAnt: {
         x: [ -50, 50, -50, 50 ],
         y: [ -50, -50, 50, 50 ]
@@ -95,7 +114,8 @@ var o = {
     o.cacheDOM();
     o.settings();
     o.bindEvents();
-    o.start();
+    o.createParticles();
+    //o.start();
   },
   createSVG: function() {
     var rectNames = [ "rectS2", "rectS", "rectM", "rectD"];
@@ -103,6 +123,7 @@ var o = {
 
     var rectPaths = ['M312 312h288v288H312z', 'M0 312h288v288H0z', 'M312 0h288v288H312z', 'M0 0h288v288H0z'];
 
+    // Make SVG element
     var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
     document.querySelector(".logo-wrapper").appendChild(svg);
@@ -113,21 +134,18 @@ var o = {
     svg.setAttribute("viewBox", "0 0 600 600");
     svg.setAttribute("style", "position: absolute; overflow: visible; opacity: 0;");
 
-    var particlesGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    // Make particle group
+    var particleGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    particleGroup.setAttribute("data-dmss", "particles");
+    svg.appendChild(particleGroup);
+
+    // Make rects
     var rectsGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    var charsGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    
-    svg.appendChild(particlesGroup);
-    svg.appendChild(rectsGroup);
-    svg.appendChild(charsGroup);
 
-    particlesGroup.setAttribute("data-dmss", "particles");
     rectsGroup.setAttribute("data-dmss", "rects");
-    charsGroup.setAttribute("data-dmss", "chars");
-
     var rectColors = Array.from(o.data.colors.rects);
     var reversedColors = rectColors.reverse();
-
+    
     for (var i = 0; i < rectNames.length; i++) {
       var rect = document.createElementNS("http://www.w3.org/2000/svg", "path");
       rect.setAttribute("data-dmss", rectNames[i]);
@@ -135,7 +153,14 @@ var o = {
       rect.setAttribute("fill", reversedColors[i]);
       rectsGroup.appendChild(rect);
     }
-    
+
+    svg.appendChild(rectsGroup);
+
+
+    // Make chars
+    var charsGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+    charsGroup.setAttribute("data-dmss", "chars");
     var characterPaths = Array.from(o.data.paths.original);
     var reversedPaths = characterPaths.reverse();
     
@@ -146,6 +171,35 @@ var o = {
       char.setAttribute("fill", "#FFFFFF");
       charsGroup.appendChild(char);
     }
+
+    svg.appendChild(charsGroup);
+
+
+    // Make a particle group for each rect, put a half svg size rect in each group
+    var particlesGroupD;
+    var particlesGroupM;
+    var particlesGroupS;
+    var particlesGroupS2;
+    var particlesBoxD;
+    var particlesBoxM;
+    var particlesBoxS;
+    var particlesBoxS2;
+    var groupNames = [particlesGroupD, particlesGroupM, particlesGroupS, particlesGroupS2];
+    var boxNames = [particlesBoxD, particlesBoxM, particlesBoxS, particlesBoxS2];
+
+    for (var i = 0; i < groupNames.length; i++) {
+      var group = groupNames[i];
+      var box = boxNames[i];
+      group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      group.setAttribute("data-dmss", "pContainer" + [i]);
+      box = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      box.setAttribute("data-dmss", "box" + [i]);
+      box.setAttribute("width", "300");
+      box.setAttribute("height", "300");
+      box.setAttribute("fill", "none");
+      particleGroup.appendChild(group);
+      group.appendChild(box);
+    } 
   },
   cacheDOM: function() {
     o.svg = document.querySelector("[data-" + o.name + "=svg]");
@@ -175,11 +229,17 @@ var o = {
   },
   // Settings
   settings: function() {
-    var allElements = [ o.el.rectD, o.el.rectM, o.el.rectS, o.el.rectS2, o.el.rects, o.el.charD, o.el.charM, o.el.charS, o.el.charS2, o.el.chars ];
+    var allElements = [ o.el.particles, o.el.pContainer0, o.el.pContainer1, o.el.pContainer2, o.el.pContainer3, o.el.rectD, o.el.rectM, o.el.rectS, o.el.rectS2, o.el.rects, o.el.charD, o.el.charM, o.el.charS, o.el.charS2, o.el.chars ];
     TweenLite.set(allElements, { svgOrigin: "300, 300" });
     
     TweenLite.defaultEase = Power1.easeInOut;
 
+    var pContainers = [ o.el.pContainer0, o.el.pContainer1, o.el.pContainer2, o.el.pContainer3 ];
+
+    for (var i = 0; i < 4; i++) {
+      TweenMax.set(pContainers[i], { rotation: o.data.rotations.pContainer[i] });
+    }
+    
     o.revealScene();
   },
   revealScene: function() {
@@ -212,29 +272,29 @@ var o = {
     var S = o.el.rectS;
     var S2 = o.el.rectS2;
     var group = o.el.rects;
+    var particles = o.el.particles;
     var rects = [ D, M, S, S2 ];
 
     var tl = new TimelineMax({ paused: false });
 
     tl
       .add("anticipation", 0)
-      .to(group, 1, { rotation: -15, ease: Power4.easeInOut }, "anticipation")
+      .to([group, particles], 1, { rotation: -15, ease: Power4.easeInOut }, "anticipation")
       .staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectAnt.x, y: o.data.positions.rectAnt.y }, scale: o.data.scales.rectAnt, ease: Power4.easeInOut }, 0.05, "anticipation")
 
       .add("spin")
-      .to(group, 1.3, { rotation: 315, ease: Power4.easeInOut }, "spin")
+      .to([group, particles], 1.3, { rotation: 315, ease: Power4.easeInOut }, "spin")
 
       .add("expand", "anticipation =+1.3")
       .staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectExp.x, y: o.data.positions.rectExp.y }, scale: 0.6, ease: Back.easeIn.config(5) }, 0, "expand")
-      .add(o.createParticles, "spin")
       
       .add("idle", "spin =+1.3")
-      .to(group, 5, { rotation: "-=15", ease: Linear.easeNone }, "idle")
+      .to([group, particles], 5, { rotation: "-=15", ease: Linear.easeNone }, "idle")
 
       .add("contraction")
-      .to(group, 0.8, { rotation: 360, ease: Power4.easeInOut }, "contraction")
+      .to([group, particles], 0.8, { rotation: 360, ease: Power4.easeInOut }, "contraction")
       .staggerTo(rects, 0.7, { x: 0, y: 0, scale: 1, ease: Back.easeInOut.config(1) }, 0.02, "contraction")
-      .set(group, { rotation: 0 })
+      .set([group, particles], { rotation: 0 })
     ;
     
     return tl;
@@ -284,13 +344,13 @@ var o = {
   createParticles: function() {
     var rects = [ o.el.rectD, o.el.rectM, o.el.rectS, o.el.rectS2 ];
     var count = o.data.particles.count;
-    var parent = o.el.particles;
+    var parents = [ o.el.pContainer0, o.el.pContainer1, o.el.pContainer2, o.el.pContainer3 ];
 
     rects.forEach(function(rect, rectIndex){
       
       for (var i = 0; i < count; i++) {
         var particle = new Particle(rect, rectIndex, i);
-        particle.appendTo(parent);
+        particle.appendTo(parents[rectIndex]);
       }
 
     });
