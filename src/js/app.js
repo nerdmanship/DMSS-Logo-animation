@@ -115,7 +115,7 @@ var o = {
     o.settings();
     o.bindEvents();
     o.createParticles();
-    //o.start();
+    o.start();
   },
   createSVG: function() {
     var rectNames = [ "rectS2", "rectS", "rectM", "rectD"];
