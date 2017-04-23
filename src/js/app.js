@@ -1,22 +1,67 @@
+/*
+
+Make smarter solutions for:
+
+Create a sinValue
+Record a scale diff value: 1 - rect._gsTransform.scaleX -> i.e. 0.2
+
+*/
+
 class Particle {
   
   constructor(rect, rectIndex, particleIndex) {
+
+    // Create a reference to a normalised exponential number based on particle index
+    var expStrength = 1.8;
+    var indexSq = Math.pow(particleIndex, expStrength);
+    var countSq = Math.pow(20, expStrength);
+    var normalisedIndex = (indexSq / countSq);
+
+    // Create element and set attributes
     this.target = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     this.target.setAttribute("data-dmss", "circle" + rectIndex + particleIndex);
     this.target.setAttribute("cx", "300");
     this.target.setAttribute("cy", "300");
     this.target.setAttribute("r", "20");
     this.target.setAttribute("fill", o.data.colors.rects[rectIndex]);
-    
-    // normalise current index on index range -> 0-1
-    // multiply that with current rect X
-    var indexSq = Math.pow(particleIndex, 1.5);
-    var countSq = Math.pow(20, 1.5);
 
-    TweenMax.to(this.target, 10, { x: 0, repeat: -1, ease: Linear.easeNone,
+    // Alias for this particle
+    var particle = this.target;
+
+    // Data used to animate this particle
+    particle.data = {
+      xMin: -50,
+      xMax: 175,
+      xMinOffset: 70,
+      acceleration: 0.3,
+      y: random(-75,75) * (1 - normalisedIndex),
+      scale: random(0.1, 0.8) + (1 - normalisedIndex)/3
+    };
+
+    //console.log("particle.data.y for particle: " + particleIndex + " in rect: " + rectIndex + " is: " + particle.data.y);
+
+    TweenMax.to(particle, 1, { x: 0, y: 0, scaleX: 0, scaleY: 0, repeat: -1, ease: Linear.easeNone,
       modifiers: {
-        x: function() {
-          return (indexSq / countSq) * rect._gsTransform.x*2;
+        x: function(x, particle) {
+          var currentValue = particle._gsTransform.x; 
+          var destinationValue = normalisedIndex * Math.abs(rect._gsTransform.x, 2)*1.2 + particle.data.xMinOffset;
+          var acc = particle.data.acceleration;
+
+          var newValue = currentValue + (destinationValue - currentValue) * acc;
+          return newValue;
+        },
+        y: function(y, particle) {
+          var newValue = particle.data.y * Math.abs(rect._gsTransform.x)/particle.data.xMax;
+          //var variationValue = newValue * sinValue;
+          return newValue;
+        },
+        scaleX: function(scale, particle) {
+          var newValue = particle.data.scale * Math.abs(rect._gsTransform.x)/particle.data.xMax;
+          return newValue; // add the current rect scale diff
+        },
+        scaleY: function(scale, particle) {
+          var newValue = particle.data.scale * Math.abs(rect._gsTransform.x)/particle.data.xMax;
+          return newValue;
         }
       }
     });
@@ -28,7 +73,7 @@ class Particle {
   }
 }
 
-
+// onUpdate = store gsTransform in obj 
 
 
 
@@ -62,7 +107,7 @@ var o = {
       count: 20
     },
     rotations: {
-      pContainer: [45, 315, 315, 45]
+      pContainer: [225, 315, 135, 45]
     },
     paths: {
       original: [
@@ -107,6 +152,11 @@ var o = {
     colors: {
       rects: [ "#4068B1", "#00BFE7", "#EF4223", "#D12368" ],
       charCont: [ "hsl(200,100,100)", "hsl(200,100,97)", "hsl(200,100,92)", "hsl(200,100,94)" ]
+    },
+    rect: {
+      xMin: 0,
+      xMax: 175,
+      current: {} // record this
     }
   },
   init: function() {
@@ -137,6 +187,7 @@ var o = {
     // Make particle group
     var particleGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
     particleGroup.setAttribute("data-dmss", "particles");
+    particleGroup.setAttribute("opacity", "0");
     svg.appendChild(particleGroup);
 
     // Make rects
@@ -211,20 +262,22 @@ var o = {
     var len = array.length;
     var obj;
 
-    if ( array === o.elements) {
+    if ( array === o.elements ) {
       o.el = {};
       obj = o.el;
       
       for (i = 0; i < len; i++) {
         obj[ array[i] ] = parent.querySelector("[data-" + name + "=" + array[i] + "]");
       }
-    } else {
+    } else if ( array === o.lists ) {
       o.list = {};
       obj = o.list;
       
       for (i = 0; i < len; i++) {
         obj[ array[i] ] = parent.querySelectorAll("[data-" + name + "=" + array[i] + "]");
       }
+    } else {
+      console.error("Tried to create references on invalid array. Valid arrays: o.elements, o.lists");
     }
   },
   // Settings
@@ -275,25 +328,27 @@ var o = {
     var particles = o.el.particles;
     var rects = [ D, M, S, S2 ];
 
-    var tl = new TimelineMax({ paused: false });
+    var tl = new TimelineMax({ paused: false, onUpdate: o.recordRectTransformObj });
 
     tl
       .add("anticipation", 0)
-      .to([group, particles], 1, { rotation: -15, ease: Power4.easeInOut }, "anticipation")
-      .staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectAnt.x, y: o.data.positions.rectAnt.y }, scale: o.data.scales.rectAnt, ease: Power4.easeInOut }, 0.05, "anticipation")
+      .to([group, particles], 1, { rotation: -15, ease: Power2.easeInOut }, "anticipation")
+      .staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectAnt.x, y: o.data.positions.rectAnt.y }, scale: o.data.scales.rectAnt, ease: Power2.easeInOut }, 0, "anticipation")
 
       .add("spin")
       .to([group, particles], 1.3, { rotation: 315, ease: Power4.easeInOut }, "spin")
 
       .add("expand", "anticipation =+1.3")
       .staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectExp.x, y: o.data.positions.rectExp.y }, scale: 0.6, ease: Back.easeIn.config(5) }, 0, "expand")
-      
+      .set(particles, { autoAlpha: 1 }, "expand =+0.7")
+
       .add("idle", "spin =+1.3")
       .to([group, particles], 5, { rotation: "-=15", ease: Linear.easeNone }, "idle")
 
       .add("contraction")
       .to([group, particles], 0.8, { rotation: 360, ease: Power4.easeInOut }, "contraction")
-      .staggerTo(rects, 0.7, { x: 0, y: 0, scale: 1, ease: Back.easeInOut.config(1) }, 0.02, "contraction")
+      .set(particles, { autoAlpha: 0 }, "contraction =+0.6")
+      .staggerTo(rects, 0.7, { x: 0, y: 0, scale: 1, ease: Back.easeInOut.config(1) }, 0, "contraction")
       .set([group, particles], { rotation: 0 })
     ;
     
@@ -312,8 +367,8 @@ var o = {
     
     tl
       .add("anticipation")
-      .to(group, 1, { rotation: -15, ease: Power4.easeInOut }, "anticipation")
-      .staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charAnt.x, y: o.data.positions.charAnt.y }, scale: 0.8, ease: Power3.easeInOut }, 0, "anticipation")
+      .to(group, 1, { rotation: -15, ease: Power2.easeInOut }, "anticipation")
+      .staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charAnt.x, y: o.data.positions.charAnt.y }, scale: 0.8, ease: Power2.easeInOut }, 0, "anticipation")
       
       .add("spin")
       .to(group, 1.2, { rotation: "+=480", ease: Power4.easeInOut }, "spin")
@@ -328,18 +383,22 @@ var o = {
       .staggerTo(chars, 5/4, { scale: "+=0.05", repeat: 2, yoyo: true }, 0.15, "idle")
       .to(group, 5, { rotation: "+=100", ease: Linear.easeNone }, "idle")
       
-      .add("morphBack")
+      .add("morphBack", "=+0.3")
       .to(chars, 0.5, { fill: o.data.colors.charCont[0] }, "morphBack")
-      .staggerTo(chars, 0.3, { cycle: { morphSVG: o.data.paths.original }, rotation: 0 }, 0.05, "morphBack")
+      .staggerTo(chars, 0.3, { cycle: { morphSVG: o.data.paths.original }, rotation: 0 }, 0, "morphBack")
       .staggerTo(chars, 0.5, { scale: 1 }, 0, "morphBack")
      
       .to(group, 0.7, { rotation: 720, ease: Back.easeInOut.config(1) }, "morphBack =+0")
-      .staggerTo(chars, 0.5, { x: 0, y: 0, ease: Back.easeOut.config(1) }, 0.01, "morphBack =+0.3")
+      .staggerTo(chars, 0.5, { x: 0, y: 0, ease: Back.easeOut.config(1) }, 0, "morphBack =+0.3")
       
       .set(group, { rotation: 0 })
     ;
     
     return tl;
+  },
+  recordRectTransformObj: function() {
+    o.data.rect.current = o.el.rectD._gsTransform;
+    console.log(o.data.rect.current.scaleX);
   },
   createParticles: function() {
     var rects = [ o.el.rectD, o.el.rectM, o.el.rectS, o.el.rectS2 ];
