@@ -1,10 +1,9 @@
 # Logo animation for DMSS – Digital Marketing Skill Share
 ## The next iteration of Digital Marketing Conferences
 
-#### Purpose
-The animation illustrates how DMSS is a conference all about sharing actionable skills. The logotype iterates from its first static state into a new dynamic state in which each node organically fuels the collective center.
+This animation illustrates how DMSS is a conference all about sharing actionable skills. The logotype iterates from its first static state into a new dynamic state in which each node organically fuels the collective center.
 
-Cool stuff about this project:
+**Cool stuff about this project:**
 * The project consists of one javascript file only
 * The whole project weigh only **47KB compressed** including dependencies
 * All graphics are dynamically created and animated
