@@ -1,3 +1,55 @@
+ // Set _gsTransform on element
+  TweenLite.set(img.element, { x: 0, y: 0 });
+  
+  // Alias for _gsTransform object
+  var pos = img.element._gsTransform;
+    
+  // What you set for the x, y, and duration really doesn't 
+  // matter since we're not using them. We just want an 
+  // infinite tween that will run the modifier functions
+  TweenMax.to(img.element, 1000, {
+    x: 0, 
+    y: 0, 
+    repeat: -1,
+    ease: Linear.easeNone,
+    modifiers: {
+      x: function() {
+        img.x = map(mouse.x, 0, vw, 0, img.xMax);
+        return pos.x + (img.x - pos.x) * acceleration;
+      },
+      y: function() {        
+        img.y = map(mouse.y, 0, vh, 0, img.yMax);
+        return pos.y + (img.y - pos.y) * acceleration;
+      }
+    }
+  });
+
+
+
+
+
+  
+
+    o.progress = { x: 0.5, y: 0.5, min: 0, max: 1 };
+    o.acceleration = { val: 0.03 };
+
+    TweenMax.to(tlX, 1000, {
+      progress: 1,
+      repeat: -1,
+      ease: Linear.easeNone,
+      modifiers: {
+        progress: function() {
+          var acceleration = o.acceleration.val;
+          var currentValue = tlX.progress();
+          var storedValue = o.progress.x = map(o.mouse.x, 0, o.vw, o.progress.min, o.progress.max);
+          var newValue = currentValue + (storedValue - currentValue) * acceleration;
+          return newValue;
+        }
+      }
+    });
+
+
+
 var count = 20;
 var rects = [];
 

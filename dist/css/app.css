@@ -419,8 +419,10 @@ template {
   position: relative;
   width: 100%;
   height: 90vh;
-  border: 1px solid red;
-  background-color: #888; }
+  background-image: url("../assets/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; }
 
 .logo-wrapper {
   position: relative;
@@ -429,5 +431,4 @@ template {
   left: 50%;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
-  margin-top: 100px;
-  border: 1px solid blue; }
+  padding-top: 100px; }

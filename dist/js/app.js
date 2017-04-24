@@ -28,7 +28,7 @@ var Particle = function () {
     this.target.setAttribute("data-dmss", "circle" + rectIndex + particleIndex);
     this.target.setAttribute("cx", "300");
     this.target.setAttribute("cy", "300");
-    this.target.setAttribute("r", "20");
+    this.target.setAttribute("r", "15");
     this.target.setAttribute("fill", o.data.colors.rects[rectIndex]);
 
     // Alias for this particle
@@ -36,38 +36,96 @@ var Particle = function () {
 
     // Data used to animate this particle
     particle.data = {
-      xMin: -50,
-      xMax: 175,
-      xMinOffset: 70,
-      acceleration: 0.3,
-      y: random(-75, 75) * (1 - normalisedIndex),
-      scale: random(0.1, 0.8) + (1 - normalisedIndex) / 3
+      xMin: 0,
+      xMax: -200 * normalisedIndex,
+      xOffset: 80,
+      xAcceleration: random(0.01, 0.5),
+      sineSpeed: random(40, 70), // Random tween speed to each particle: higher is slower
+      y: random(-50, 50),
+      yVariation: random(10, 50),
+      scale: random(0.2, 0.8) + (1 - normalisedIndex) / 4,
+      scaleVariation: 0.3
     };
-
-    //console.log("particle.data.y for particle: " + particleIndex + " in rect: " + rectIndex + " is: " + particle.data.y);
 
     TweenMax.to(particle, 1, { x: 0, y: 0, scaleX: 0, scaleY: 0, repeat: -1, ease: Linear.easeNone,
       modifiers: {
         x: function x(_x, particle) {
-          var currentValue = particle._gsTransform.x;
-          var destinationValue = normalisedIndex * Math.abs(rect._gsTransform.x, 2) * 1.2 + particle.data.xMinOffset;
-          var acc = particle.data.acceleration;
 
-          var newValue = currentValue + (destinationValue - currentValue) * acc;
-          return newValue;
+          // Tween particle smoothly from pMin to pMax when rect tween from rectMin to rectMax
+
+          var currentX = particle._gsTransform.x; // Current position of particle
+          var rectX = o.data.rect.current.x || 0; // Current position of rect
+          var offsetX = particle.data.xOffset; // Min value for particle
+          var acc = particle.data.xAcceleration; // Slugginess
+
+          // Range values
+          var rectMin = o.data.rect.xMin;
+          var rectMax = o.data.rect.xMax;
+          var particleMin = particle.data.xMin;
+          var particleMax = particle.data.xMax;
+
+          // Get a new particle position on particle range based on rects position on rect range
+          var nextX = map(rectX, rectMin, rectMax, particleMin, particleMax) + particle.data.xOffset;
+          var modifiedVal = currentX + (nextX - currentX) * acc;
+          return modifiedVal;
         },
+
         y: function y(_y, particle) {
-          var newValue = particle.data.y * Math.abs(rect._gsTransform.x) / particle.data.xMax;
-          //var variationValue = newValue * sinValue;
-          return newValue;
+
+          // Move particle vertically on y range
+          var ticker = o.data.ticker;
+          var sineSpeed = particle.data.sineSpeed;
+          var yMin = particle.data.y * (1 - normalisedIndex) - particle.data.yVariation;
+          var yMax = particle.data.y * (1 - normalisedIndex) + particle.data.yVariation;
+
+          // Make a wave with unique speed
+          var wave = Math.sin(ticker / sineSpeed);
+
+          // Get a value on y range based on wave on wave range
+          var modifiedVal = map(wave, -1, 1, yMin, yMax);
+
+          return modifiedVal;
         },
+
         scaleX: function scaleX(scale, particle) {
-          var newValue = particle.data.scale * Math.abs(rect._gsTransform.x) / particle.data.xMax;
-          return newValue; // add the current rect scale diff
+          // Scale particle up and down
+          var ticker = o.data.ticker;
+          var sineSpeed = particle.data.sineSpeed;
+          var scaleX = particle.data.scale;
+          var scaleVariation = particle.data.scaleVariation;
+          var scaleMin = scaleX - scaleVariation; // Make this acutal min value
+          var scaleMax = scaleX + scaleVariation;
+
+          // Make a wave with unique speed
+          var wave = Math.sin(ticker / sineSpeed);
+
+          // Get a value on y range based on wave on wave range
+          var newScaleX = map(wave, -1, 1, scaleMin, scaleMax);
+
+          var index = o.data.particles.count - particleIndex - 1;
+          var val = o.data.scales.particles[index].value;
+
+          return newScaleX + newScaleX * val;
         },
         scaleY: function scaleY(scale, particle) {
-          var newValue = particle.data.scale * Math.abs(rect._gsTransform.x) / particle.data.xMax;
-          return newValue;
+          // Scale particle up and down
+          var ticker = o.data.ticker;
+          var sineSpeed = particle.data.sineSpeed;
+          var scaleY = particle.data.scale;
+          var scaleVariation = particle.data.scaleVariation;
+          var scaleMin = scaleY - scaleVariation;
+          var scaleMax = scaleY + scaleVariation;
+
+          // Make a wave with unique speed
+          var wave = Math.sin(ticker / sineSpeed);
+
+          // Get a value on y range based on wave on wave range
+          var newScaleY = map(wave, -1, 1, scaleMin, scaleMax);
+
+          var index = o.data.particles.count - particleIndex - 1;
+          var val = o.data.scales.particles[index].value;
+
+          return newScaleY + newScaleY * val;
         }
       }
     });
@@ -92,6 +150,7 @@ var o = {
   lists: [],
   data: {
     // types: { section: { value: { } } },
+    ticker: 0,
     particles: {
       count: 20
     },
@@ -126,7 +185,8 @@ var o = {
     },
     scales: {
       rectAnt: [0.86, 0.83, 0.88, 0.8],
-      charCont: [0.7, 0.65, 0.8, 0.75]
+      charCont: [0.7, 0.65, 0.8, 0.75],
+      particles: [{ value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }, { value: 0 }]
     },
     colors: {
       rects: ["#4068B1", "#00BFE7", "#EF4223", "#D12368"],
@@ -135,7 +195,7 @@ var o = {
     rect: {
       xMin: 0,
       xMax: 175,
-      current: {} // record this
+      current: {}
     }
   },
   init: function init() {
@@ -280,7 +340,7 @@ var o = {
   bindEvents: function bindEvents() {},
   start: function start() {
     var master = o.getMasterTl();
-    master.play();
+    master.play().timeScale(1);
   },
   getMasterTl: function getMasterTl() {
     var tl = new TimelineMax({ paused: true, repeat: -1 });
@@ -303,7 +363,10 @@ var o = {
 
     var tl = new TimelineMax({ paused: false, onUpdate: o.recordRectTransformObj });
 
-    tl.add("anticipation", 0).to([group, particles], 1, { rotation: -15, ease: Power2.easeInOut }, "anticipation").staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectAnt.x, y: o.data.positions.rectAnt.y }, scale: o.data.scales.rectAnt, ease: Power2.easeInOut }, 0, "anticipation").add("spin").to([group, particles], 1.3, { rotation: 315, ease: Power4.easeInOut }, "spin").add("expand", "anticipation =+1.3").staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectExp.x, y: o.data.positions.rectExp.y }, scale: 0.6, ease: Back.easeIn.config(5) }, 0, "expand").set(particles, { autoAlpha: 1 }, "expand =+0.7").add("idle", "spin =+1.3").to([group, particles], 5, { rotation: "-=15", ease: Linear.easeNone }, "idle").add("contraction").to([group, particles], 0.8, { rotation: 360, ease: Power4.easeInOut }, "contraction").set(particles, { autoAlpha: 0 }, "contraction =+0.6").staggerTo(rects, 0.7, { x: 0, y: 0, scale: 1, ease: Back.easeInOut.config(1) }, 0, "contraction").set([group, particles], { rotation: 0 });
+    tl.add("anticipation", 0).to([group, particles], 1, { rotation: -15, ease: Power2.easeInOut }, "anticipation").staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectAnt.x, y: o.data.positions.rectAnt.y }, scale: o.data.scales.rectAnt, ease: Power2.easeInOut }, 0, "anticipation").add("spin").to([group, particles], 1.3, { rotation: 315, ease: Power4.easeInOut }, "spin").add("expand", "anticipation =+1.3").staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectExp.x, y: o.data.positions.rectExp.y }, scale: 0.6, ease: Back.easeIn.config(5) }, 0, "expand").set(particles, { autoAlpha: 1 }, "expand =+0.5").add("idle", "spin =+1.3").to([group, particles], 5, { rotation: "-=15", ease: Linear.easeNone }, "idle")
+
+    // Pulse here
+    .staggerTo(rects, 0.7, { scale: "+=0.07", ease: CustomEase.create("custom", "M0,0,C0.134,0,0.1,0.8,0.23,0.8,0.312,0.8,0.338,0.5,0.42,0.5,0.554,0.5,0.491,1,0.576,1,0.687,1,0.86,0,1,0") }, 0, "idle =+1").staggerTo(rects, 0.7, { scale: "+=0.07", ease: CustomEase.create("custom", "M0,0,C0.134,0,0.1,0.8,0.23,0.8,0.312,0.8,0.338,0.5,0.42,0.5,0.554,0.5,0.491,1,0.576,1,0.687,1,0.86,0,1,0") }, 0, "idle =+3.3").staggerTo(o.data.scales.particles, 0.5, { value: 1, ease: Power1.easeInOut, repeat: 1, yoyo: true }, 0.03, "idle =+1.15").staggerTo(o.data.scales.particles, 0.5, { value: 1, ease: Power1.easeInOut, repeat: 1, yoyo: true }, 0.03, "idle =+3.45").add("contraction", "idle =+5").to([group, particles], 0.8, { rotation: 360, ease: Power4.easeInOut }, "contraction").to(particles, 0.2, { autoAlpha: 0 }, "contraction =+0.4").staggerTo(rects, 0.7, { x: 0, y: 0, scale: 1, ease: Back.easeInOut.config(1) }, 0, "contraction").set([group, particles], { rotation: 0 });
 
     return tl;
   },
@@ -318,13 +381,18 @@ var o = {
 
     var tl = new TimelineMax({ paused: false });
 
-    tl.add("anticipation").to(group, 1, { rotation: -15, ease: Power2.easeInOut }, "anticipation").staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charAnt.x, y: o.data.positions.charAnt.y }, scale: 0.8, ease: Power2.easeInOut }, 0, "anticipation").add("spin").to(group, 1.2, { rotation: "+=480", ease: Power4.easeInOut }, "spin").add("contraction", "spin =+0.5").staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charCont.x, y: o.data.positions.charCont.y }, ease: Back.easeOut.config(1) }, 0, "contraction").staggerTo(chars, 0.4, { cycle: { scale: o.data.scales.charCont }, ease: Back.easeOut.config(1) }, 0, "contraction").staggerTo(chars, 0.5, { cycle: { fill: o.data.colors.charCont } }, 0, "contraction").staggerTo(chars, 0.3, { cycle: { morphSVG: o.data.paths.morph } }, 0, "contraction").add("idle").staggerTo(chars, 5 / 4, { scale: "+=0.05", repeat: 2, yoyo: true }, 0.15, "idle").to(group, 5, { rotation: "+=100", ease: Linear.easeNone }, "idle").add("morphBack", "=+0.3").to(chars, 0.5, { fill: o.data.colors.charCont[0] }, "morphBack").staggerTo(chars, 0.3, { cycle: { morphSVG: o.data.paths.original }, rotation: 0 }, 0, "morphBack").staggerTo(chars, 0.5, { scale: 1 }, 0, "morphBack").to(group, 0.7, { rotation: 720, ease: Back.easeInOut.config(1) }, "morphBack =+0").staggerTo(chars, 0.5, { x: 0, y: 0, ease: Back.easeOut.config(1) }, 0, "morphBack =+0.3").set(group, { rotation: 0 });
+    tl.add("anticipation").to(group, 1, { rotation: -15, ease: Power2.easeInOut }, "anticipation").staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charAnt.x, y: o.data.positions.charAnt.y }, scale: 0.8, ease: Power2.easeInOut }, 0, "anticipation").add("spin").to(group, 1.2, { rotation: "+=480", ease: Power4.easeInOut }, "spin").add("contraction", "spin =+0.5").staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charCont.x, y: o.data.positions.charCont.y }, ease: Back.easeOut.config(1) }, 0, "contraction").staggerTo(chars, 0.4, { cycle: { scale: o.data.scales.charCont }, ease: Back.easeOut.config(1) }, 0, "contraction").staggerTo(chars, 0.5, { cycle: { fill: o.data.colors.charCont } }, 0, "contraction").staggerTo(chars, 0.3, { cycle: { morphSVG: o.data.paths.morph } }, 0, "contraction").add("idle").staggerTo(chars, 5 / 4, { scale: "+=0.05", repeat: 2, yoyo: true }, 0.15, "idle").to(group, 5, { rotation: "+=100", ease: Linear.easeNone }, "idle")
+
+    // Pulse
+    .to(group, 0.5, { scale: 1.15, ease: Power1.easeInOut, repeat: 1, yoyo: true }, "idle =+1.9").to(group, 0.5, { scale: 1.15, ease: Power1.easeInOut, repeat: 1, yoyo: true }, "idle =+4.2").add("morphBack", "idle =+5").to(group, 0.5, { rotation: 1080, ease: Power1.easeInOut }, "morphBack").to(chars, 0.5, { fill: o.data.colors.charCont[0] }, "morphBack").staggerTo(chars, 0.5, { cycle: { morphSVG: o.data.paths.original }, rotation: 0 }, 0, "morphBack =+0.1").staggerTo(chars, 0.5, { scale: 1, ease: Power4.easeInOut }, 0, "morphBack =+0.2").staggerTo(chars, 0.5, { x: 0, y: 0, ease: Power4.easeInOut }, 0, "morphBack =+0.2").set(group, { rotation: 0 });
 
     return tl;
   },
   recordRectTransformObj: function recordRectTransformObj() {
     o.data.rect.current = o.el.rectD._gsTransform;
-    console.log(o.data.rect.current.scaleX);
+
+    o.data.ticker++;
+    //console.log(sine);
   },
   createParticles: function createParticles() {
     var rects = [o.el.rectD, o.el.rectM, o.el.rectS, o.el.rectS2];
