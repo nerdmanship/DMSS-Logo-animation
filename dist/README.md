@@ -5,9 +5,10 @@
 The animation illustrates how DMSS is a conference all about sharing actionable skills. The logotype iterates from its first static state into a new dynamic state in which each node organically fuels the collective center.
 
 Cool stuff about this project:
-* The project consists of one javascript file only (47KB compressed)
+* The project consists of one javascript file only
+* The whole project weigh only **47KB compressed** including dependencies
 * All graphics are dynamically created and animated
-* You just choose a div and push start
+* You just link it, choose a div and push start
 
 ## Links
 
@@ -15,7 +16,7 @@ Cool stuff about this project:
 ### [Launch project](https://nerdmanship.github.io/DMSS-Logo-animation/dist)
 ### [Live website](https://www.dmss.io/) (Coming soon)
 
-## How to install
+## How to use
   
 Could not be easier.
 
