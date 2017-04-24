@@ -31,8 +31,8 @@ class Particle {
     // Data used to animate this particle
     particle.data = {
       xMin: 0,
-      xMax: -200 * normalisedIndex,
-      xOffset: 80,
+      xMax: -300 * normalisedIndex,
+      xOffset: 0,
       xAcceleration: random(0.01,0.5),
       sineSpeed: random(40,70), // Random tween speed to each particle: higher is slower
       y: random(-50,50),
@@ -200,8 +200,8 @@ var o = {
         y: [ -50, -50, 50, 50 ]
       },
       charCont: {
-        x: [ 100, -100, 100, -100 ],
-        y: [ 100, 100, -100, -100 ]
+        x: [ random(50,60), -random(50,60), random(50,60), -random(50,60) ],
+        y: [ random(50,60), random(50,60), -random(50,60), -random(50,60) ]
       }
     },
     scales: {
@@ -240,15 +240,15 @@ var o = {
       current: {}
     }
   },
-  init: function() {
-    o.createSVG();
+  init: function(id) {
+    o.createSVG(id);
     o.cacheDOM();
     o.settings();
     o.bindEvents();
     o.createParticles();
     o.start();
   },
-  createSVG: function() {
+  createSVG: function(id) {
     var rectNames = [ "rectS2", "rectS", "rectM", "rectD"];
     var charNames = [ "charS2", "charS", "charM", "charD"];
 
@@ -257,7 +257,7 @@ var o = {
     // Make SVG element
     var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
-    document.querySelector(".logo-wrapper").appendChild(svg);
+    document.querySelector("#" + id).appendChild(svg);
 
     svg.setAttribute("data-dmss", "svg");
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -409,12 +409,12 @@ var o = {
     var particles = o.el.particles;
     var rects = [ D, M, S, S2 ];
 
-    var tl = new TimelineMax({ paused: false, onUpdate: o.recordRectTransformObj });
+    var tl = new TimelineMax({ paused: false, onUpdate: o.recordValues });
 
     tl
       .add("anticipation", 0)
-      .to([group, particles], 1, { rotation: -15, ease: Power2.easeInOut }, "anticipation")
-      .staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectAnt.x, y: o.data.positions.rectAnt.y }, scale: o.data.scales.rectAnt, ease: Power2.easeInOut }, 0, "anticipation")
+      .to([group, particles], 0.8, { rotation: -5, ease: Power3.easeInOut }, "anticipation")
+      .staggerTo(rects, 0.8, { cycle: { x: o.data.positions.rectAnt.x, y: o.data.positions.rectAnt.y }, scale: 0.9, ease: Power3.easeInOut }, 0, "anticipation")
 
       .add("spin")
       .to([group, particles], 1.3, { rotation: 315, ease: Power4.easeInOut }, "spin")
@@ -425,17 +425,21 @@ var o = {
 
       .add("idle", "spin =+1.3")
       .to([group, particles], 5, { rotation: "-=15", ease: Linear.easeNone }, "idle")
+      .staggerTo(rects, 1, { scale: 0.59, ease: Power1.easeInOut }, 0, "idle")
+      .staggerTo(rects, 0.5, { scale: 0.65, ease: Power2.easeIn }, 0, "idle =+1")
+      .staggerTo(rects, 0.5, { scale: 0.63, ease: Power1.easeOut }, 0, "idle =+1.5")
 
-      // Pulse here
-      .staggerTo( rects, 0.7, { scale: "+=0.07", ease:  CustomEase.create("custom", "M0,0,C0.134,0,0.1,0.8,0.23,0.8,0.312,0.8,0.338,0.5,0.42,0.5,0.554,0.5,0.491,1,0.576,1,0.687,1,0.86,0,1,0") }, 0, "idle =+1")
-      .staggerTo( rects, 0.7, { scale: "+=0.07", ease:  CustomEase.create("custom", "M0,0,C0.134,0,0.1,0.8,0.23,0.8,0.312,0.8,0.338,0.5,0.42,0.5,0.554,0.5,0.491,1,0.576,1,0.687,1,0.86,0,1,0") }, 0, "idle =+3.3")
-      .staggerTo( o.data.scales.particles, 0.5, { value: 1, ease: Power1.easeInOut, repeat: 1, yoyo:true }, 0.03, "idle =+1.15")
-      .staggerTo( o.data.scales.particles, 0.5, { value: 1, ease: Power1.easeInOut, repeat: 1, yoyo:true }, 0.03, "idle =+3.45")
+      .staggerTo(rects, 1, { scale: 0.59, ease: Power1.easeInOut }, 0, "idle =+2.5")
+      .staggerTo(rects, 0.5, { scale: 0.65, ease: Power2.easeIn }, 0, "idle =+3.5")
+      .staggerTo(rects, 1, { scale: 0.6, ease: Power1.easeOut }, 0, "idle =+4")
+
+      .staggerTo( o.data.scales.particles, 0.4, { value: 1, ease: Power1.easeInOut, repeat: 1, yoyo:true }, 0.05, "idle =+1.15")
+      .staggerTo( o.data.scales.particles, 0.4, { value: 1, ease: Power1.easeInOut, repeat: 1, yoyo:true }, 0.05, "idle =+3.75")
 
       .add("contraction", "idle =+5")
       .to([group, particles], 0.8, { rotation: 360, ease: Power4.easeInOut }, "contraction")
-      .to(particles, 0.2, { autoAlpha: 0 }, "contraction =+0.4")
-      .staggerTo(rects, 0.7, { x: 0, y: 0, scale: 1, ease: Back.easeInOut.config(1) }, 0, "contraction")
+      .to(particles, 0, { autoAlpha: 0 }, "contraction =+0.4")
+      .staggerTo(rects, 0.7, { x: 0, y: 0, scale: 1, ease: Back.easeOut.config(2) }, 0, "contraction")
       .set([group, particles], { rotation: 0 })
     ;
     
@@ -454,27 +458,25 @@ var o = {
     
     tl
       .add("anticipation")
-      .to(group, 1, { rotation: -15, ease: Power2.easeInOut }, "anticipation")
-      .staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charAnt.x, y: o.data.positions.charAnt.y }, scale: 0.8, ease: Power2.easeInOut }, 0, "anticipation")
+      .to(group, 0.8, { rotation: -5, ease: Power3.easeInOut }, "anticipation")
+      .staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charAnt.x, y: o.data.positions.charAnt.y }, scale: 0.9, ease: Power3.easeInOut }, 0, "anticipation")
       
       .add("spin")
-      .to(group, 1.2, { rotation: "+=480", ease: Power4.easeInOut }, "spin")
+      .to(group, 1.3, { rotation: "+=355", ease: Power4.easeInOut }, "spin")
       
       .add("contraction", "spin =+0.5")
       .staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charCont.x, y: o.data.positions.charCont.y }, ease: Back.easeOut.config(1) }, 0, "contraction")
-      .staggerTo(chars, 0.4, { cycle: { scale: o.data.scales.charCont }, ease: Back.easeOut.config(1) }, 0, "contraction")
+      .staggerTo(chars, 0.4, { scale: 0.4, ease: Power4.easeInOut }, 0, "contraction")
       .staggerTo(chars, 0.3, { cycle: { morphSVG: o.data.paths.morph } }, 0, "contraction")
 
       .add("idle")
-      .staggerTo(chars, 5/4, { scale: "+=0.05", repeat: 2, yoyo: true }, 0.15, "idle")
-      .to(group, 5, { rotation: "+=100", ease: Linear.easeNone }, "idle")
+      .staggerTo(chars, 1.25, { scale: 0, ease: Power1.easeInOut, repeat: 3, yoyo: true }, 0.15, "spin =+0.9") // 5.45 duration
+      .to(group, 1.25, { scale: 1.5, ease: Power1.easeInOut, repeat: 3, yoyo:true }, "spin =+0.9")
+      .to(group, 5, { rotation: "+=200", ease: Linear.easeNone }, "idle")
 
-      // Pulse
-      .to(group, 0.5, { scale: 1.15, ease: Power1.easeInOut, repeat: 1, yoyo:true }, "idle =+1.9")
-      .to(group, 0.5, { scale: 1.15, ease: Power1.easeInOut, repeat: 1, yoyo:true }, "idle =+4.2")
       
       .add("morphBack", "idle =+5")
-      .to(group, 0.5, { rotation: 1080, ease: Power1.easeInOut }, "morphBack")
+      .to(group, 0.5, { rotation: 720, ease: Power1.easeInOut }, "morphBack")
 
       .staggerTo(chars, 0.5, { cycle: { morphSVG: o.data.paths.original }, rotation: 0 }, 0, "morphBack =+0.1")
       
@@ -486,11 +488,9 @@ var o = {
     
     return tl;
   },
-  recordRectTransformObj: function() {
+  recordValues: function() {
     o.data.rect.current = o.el.rectD._gsTransform;
-
     o.data.ticker++;
-    //console.log(sine);
   },
   createParticles: function() {
     var rects = [ o.el.rectD, o.el.rectM, o.el.rectS, o.el.rectS2 ];
@@ -508,7 +508,7 @@ var o = {
   }
 };
 
-window.addEventListener("load", o.init);
+window.addEventListener("load", o.init("wrapper"));
 
 function random(min, max) {
   if (max === null) { max = min; min = 0; }

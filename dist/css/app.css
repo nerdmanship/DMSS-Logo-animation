@@ -424,7 +424,7 @@ template {
   background-attachment: fixed;
   background-position: center; }
 
-.logo-wrapper {
+#wrapper {
   position: relative;
   width: 300px;
   height: 300px;
@@ -433,6 +433,6 @@ template {
           transform: translate(-50%);
   padding-top: 100px; }
   @media (max-width: 600px) {
-    .logo-wrapper {
+    #wrapper {
       width: 200px;
       height: 200px; } }
