@@ -5,7 +5,7 @@
 The animation illustrates how DMSS is a conference all about sharing actionable skills. The logotype iterates from its first static state into a new dynamic state in which each node organically fuels the collective center.
 
 Cool stuff about this project:
-* The project consists of one javascript file only
+* The project consists of one javascript file only (47KB compressed)
 * All graphics are dynamically created and animated
 * You just choose a div and push start
 
