@@ -19,11 +19,14 @@ Cool stuff about this project:
 
 Could not be easier.
 
-1. Grab [logoAnimation.min.js](https://github.com/nerdmanship/DMSS-Logo-animation/blob/master/dist/js/logoAnimation.min.js) /dist/js/ and link in the page head. Example: `<script src="logoAnimation.min.js"></script>`
+1. Grab [logoAnimation.min.js](https://github.com/nerdmanship/DMSS-Logo-animation/blob/master/dist/js/logoAnimation.min.js) in /dist/js/ and link in the page head.
+Example: `<script src="logoAnimation.min.js"></script>`
 
-2. Create a div wherever you want the logo on your page. Example: `<div id="wrapper"></div>`
+2. Create a div wherever you want the logo on your page.
+Example: `<div id="wrapper"></div>`
 
-3. Pass the div id as a string when you initialise the animation on page load. Example: `window.addEventListener("load", animateLogo("wrapper");`
+3. Pass the div id as a string when you initialise the animation on page load.
+Example: `window.addEventListener("load", animateLogo("wrapper");`
 
 You can position and style the div as you would with any normal image wrapper, including media queries. The logotype takes the dimension you give the wrapper, but the animation will go beyond those boarders in its expanded state.
 
@@ -36,7 +39,7 @@ You can position and style the div as you would with any normal image wrapper, i
 ## Follow Nerdmanship Custom
 * [Facebook](http://www.facebook.com/nerdmanship)
 * [Twitter](http://www.twitter.com/stromqvist)
-* [Dribbble](http://www.dribbble.com/nerdmanship)
+* [Dribbble](http://www.dribbble.com/stromqvist)
 * [Codepen](http://www.codepen.io/nerdmanship)
 
 ## License
