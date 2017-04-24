@@ -24,9 +24,11 @@ Could not be easier.
 `<script src="logoAnimation.min.js"></script>`
 
 2. Create a div wherever you want the logo on your page.
+
 `<div id="wrapper"></div>`
 
 3. Pass the div id as a string when you initialise the animation on page load.
+
 `window.addEventListener("load", animateLogo("wrapper");`
 
 You can position and style the div as you would with any normal image wrapper, including media queries. The logotype takes the dimension you give the wrapper, but the animation will go beyond those boarders in its expanded state.
