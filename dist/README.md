@@ -9,22 +9,23 @@ Cool stuff about this project:
 * All graphics are dynamically created and animated
 * You just choose a div and push start
 
-## [Made by Nerdmanship Custom](https://nerdmanship.com/)
+## Links
 
+### [Nerdmanship Custom](http://www.nerdmanship.com/) (Author)
 ### [Launch project](https://nerdmanship.github.io/DMSS-Logo-animation/dist)
-### [Live website](https://dmss.io) (Coming soon)
+### [Live website](https://www.dmss.io/) (Coming soon)
 
 ## How to install
 
 Could not be easier.
 
-1. Link [logoAnimation.min.js](https://nerdmanship.github.io/DMSS-Logo-animation/dist/js) in the page head. Example: `<script src="logoAnimation.min.js"></script>`
+1. Link [logoAnimation.min.js](https://github.com/nerdmanship/DMSS-Logo-animation/tree/master/dist/js) in the page head. Example: `<script src="logoAnimation.min.js"></script>`
 
-2. Create a div for the animation. Example: `<div id="wrapper"></div>`
+2. Create a div wherever you want the logo. Example: `<div id="wrapper"></div>`
 
 3. Pass the id as a string when you initialise the animation on page load. Example: `window.addEventListener("load", animateLogo("wrapper");`
 
-You can style the div as any image wrapper.
+You can position and style the div as you would with any normal image wrapper, including media queries. The logotype takes the dimension you give the wrapper, but the animation will go beyond those boarders in its expanded state.
 
 ## Dependencies
 (Included in logoAnimation.min.js)
@@ -40,4 +41,4 @@ You can style the div as any image wrapper.
 
 ## License
 
-The code is available under the [MIT license](LICENSE.txt), but name and logotype is not.
+The code is available under the [MIT license](LICENSE.txt), but conference name (DMSS) and logotype is not.

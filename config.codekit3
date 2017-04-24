@@ -1111,7 +1111,7 @@
 	"\/src\/assets\/bower_components\/modernizr\/modernizr-2.8.3.min.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 2,
+		"oA": 1,
 		"oAP": "\/dist\/js\/modernizr-2.8.3.min.js",
 		"oF": 3,
 		"sC": 1,
