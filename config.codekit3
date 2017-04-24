@@ -3034,14 +3034,47 @@
 		"oF": 1,
 		"oS": 0
 		},
-	"\/src\/js\/app.js": {
+	"\/src\/js\/ex-app.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/js\/ex-app.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/js\/index.js": {
 		"ft": 64,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "\/dist\/js\/app.js",
+		"oAP": "\/dist\/js\/index.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 1
+		},
+	"\/src\/js\/logoAnimation.js": {
+		"ft": 64,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/dist\/js\/logoAnimation.min.js",
+		"oF": 3,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/js\/logoAnimation.min.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "\/dist\/js\/logoAnimation.min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/js\/logoAnimation.min.js.map": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/dist\/js\/logoAnimation.min.js.map",
+		"oF": 0
 		},
 	"\/src\/pug\/head.pug": {
 		"cOD": 1,
@@ -3105,13 +3138,33 @@
 "hooks": [
 	],
 "manualImportLinks": {
+	"\/src\/js\/logoAnimation.js": [
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/src\/assets\/greensock-js-with-customease\/src\/minified\/TweenMax.min.js",
+			"position": 0,
+			"type": 0
+			},
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/ModifiersPlugin.min.js",
+			"position": 1,
+			"type": 0
+			},
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/src\/assets\/GreenSock-ShockinglyGreen-js\/src\/minified\/plugins\/MorphSVGPlugin.min.js",
+			"position": 2,
+			"type": 0
+			}
+		]
 	},
 "projectAttributes": {
 	"creationDate": 514090748,
 	"displayValue": "dmss",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-angryBaby",
-	"lastBuiltDate": 514709682
+	"lastBuiltDate": 514723963
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,

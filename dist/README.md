@@ -1,36 +1,38 @@
-# Website header logo animation for DMSS – Digital Marketing Skill Share
+# Logo animation for DMSS – Digital Marketing Skill Share
+## The next iteration of Digital Marketing Conferences
 
-## Made by [the Nerdmanship](https://nerdmanship.com/)
+#### Purpose
+The animation illustrates how DMSS is a conference all about sharing actionable skills. The logotype iterates from its first static state into a new dynamic state in which each node organically fuels the collective center.
+
+Cool stuff about this project:
+* The project consists of one javascript file only
+* All graphics are dynamically created and animated
+* You just choose a div and push start
+
+## [Made by Nerdmanship Custom](https://nerdmanship.com/)
 
 ### [Launch project](https://nerdmanship.github.io/DMSS-Logo-animation/dist)
+### [Live website](https://dmss.io) (Coming soon)
 
-## Installation guide
+## How to install
 
 Could not be easier.
 
-1. Link the script in the page head:
+1. Link [logoAnimation.min.js](https://nerdmanship.github.io/DMSS-Logo-animation/dist/js) in the page head. Example: `<script src="logoAnimation.min.js"></script>`
 
-  <script src="js/app.js"></script>
+2. Create a div for the animation. Example: `<div id="wrapper"></div>`
 
-2. Create a div for the animation:
+3. Pass the id as a string when you initialise the animation on page load. Example: `window.addEventListener("load", animateLogo("wrapper");`
 
-  <div id="wrapper"></div>
+You can style the div as any image wrapper.
 
-3. And pass the id as a string in the function call:
-
-  initAnimation("wrapper");
-
-Then you can style the div as any image wrapper.
-
-
-
-Dependencies
+## Dependencies
+(Included in logoAnimation.min.js)
 * GSAP TweenMax
 * GSAP MorphSVGPlugin
-* GSAP CustomEasePlugin
 * GSAP ModifiersPlugin
 
-Follow Nerdmanship Custom
+## Follow Nerdmanship Custom
 * [Facebook](http://www.facebook.com/nerdmanship)
 * [Twitter](http://www.twitter.com/stromqvist)
 * [Dribbble](http://www.dribbble.com/nerdmanship)
@@ -38,4 +40,4 @@ Follow Nerdmanship Custom
 
 ## License
 
-The code is available under the [MIT license](LICENSE.txt).
+The code is available under the [MIT license](LICENSE.txt), but name and logotype is not.

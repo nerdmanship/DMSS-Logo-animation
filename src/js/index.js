@@ -1,0 +1,1 @@
+animateLogo("wrapper");
