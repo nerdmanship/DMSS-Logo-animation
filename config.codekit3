@@ -3043,15 +3043,6 @@
 		"sC": 1,
 		"tS": 1
 		},
-	"\/src\/js\/ref.js": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "\/dist\/js\/ref.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 1
-		},
 	"\/src\/pug\/head.pug": {
 		"cOD": 1,
 		"ft": 512,

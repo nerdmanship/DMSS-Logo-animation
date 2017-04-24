@@ -432,3 +432,7 @@ template {
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
   padding-top: 100px; }
+  @media (max-width: 600px) {
+    .logo-wrapper {
+      width: 200px;
+      height: 200px; } }
