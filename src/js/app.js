@@ -463,7 +463,6 @@ var o = {
       .add("contraction", "spin =+0.5")
       .staggerTo(chars, 0.8, { cycle: { x: o.data.positions.charCont.x, y: o.data.positions.charCont.y }, ease: Back.easeOut.config(1) }, 0, "contraction")
       .staggerTo(chars, 0.4, { cycle: { scale: o.data.scales.charCont }, ease: Back.easeOut.config(1) }, 0, "contraction")
-      .staggerTo(chars, 0.5, { cycle: { fill: o.data.colors.charCont } }, 0, "contraction")
       .staggerTo(chars, 0.3, { cycle: { morphSVG: o.data.paths.morph } }, 0, "contraction")
 
       .add("idle")
@@ -476,7 +475,6 @@ var o = {
       
       .add("morphBack", "idle =+5")
       .to(group, 0.5, { rotation: 1080, ease: Power1.easeInOut }, "morphBack")
-      .to(chars, 0.5, { fill: o.data.colors.charCont[0] }, "morphBack")
 
       .staggerTo(chars, 0.5, { cycle: { morphSVG: o.data.paths.original }, rotation: 0 }, 0, "morphBack =+0.1")
       
