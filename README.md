@@ -19,7 +19,9 @@ Cool stuff about this project:
 
 Could not be easier.
 
-1. Grab [logoAnimation.min.js](https://github.com/nerdmanship/DMSS-Logo-animation/blob/master/dist/js/logoAnimation.min.js) in /dist/js/ and link in the page head.  Example: `<script src="logoAnimation.min.js"></script>`
+1. Grab [logoAnimation.min.js](https://github.com/nerdmanship/DMSS-Logo-animation/blob/master/dist/js/logoAnimation.min.js) in /dist/js/ and link in the page head.
+
+Example: `<script src="logoAnimation.min.js"></script>`
 
 2. Create a div wherever you want the logo on your page.
 Example: `<div id="wrapper"></div>`
