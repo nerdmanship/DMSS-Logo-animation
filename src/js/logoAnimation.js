@@ -153,6 +153,7 @@ var o = {
   data: {
     // types: { section: { value: { } } },
     ticker: 0,
+    playing: false,
     particles: {
       count: 20
     },
@@ -254,7 +255,7 @@ var o = {
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svg.setAttribute("xlinkns", "http://www.w3.org/1999/xlink");
     svg.setAttribute("viewBox", "0 0 600 600");
-    svg.setAttribute("style", "position: absolute; overflow: visible; opacity: 0;");
+    svg.setAttribute("style", "position: absolute; overflow: visible; opacity: 0; cursor: pointer;");
 
     // Make particle group
     var particleGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
@@ -373,13 +374,22 @@ var o = {
   },
   // Bind events
   bindEvents: function() {
+    o.svg.addEventListener("mousedown", o.logoClicked);
+    o.svg.addEventListener("touchstart", o.logoClicked);
+  },
+  logoClicked: function() {
+    if (!o.data.playing) {
+      TweenMax.to(o.svg, 0.05, {scale: 0.98, transformOrigin: "center", repeat: 1, yoyo: true});
+      o.start();
+    }
   },
   start: function() {
+    o.data.playing = true;
     var master = o.getMasterTl();
     master.play().timeScale(1);
   },
   getMasterTl: function() {
-    var tl = new TimelineMax({ paused: true, repeat: -1 });
+    var tl = new TimelineMax({ paused: true, onComplete: function() { o.data.playing = false } });
     var rectsTimeline = o.getRectsTl();
     var charsTimeline = o.getCharsTl();
     
