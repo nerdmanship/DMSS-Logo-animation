@@ -375,11 +375,17 @@ var o = {
   // Bind events
   bindEvents: function() {
     o.svg.addEventListener("mousedown", o.logoClicked);
+    o.svg.addEventListener("mouseup", o.logoReleased);
     o.svg.addEventListener("touchstart", o.logoClicked);
   },
   logoClicked: function() {
     if (!o.data.playing) {
-      TweenMax.to(o.svg, 0.05, {scale: 0.98, transformOrigin: "center", repeat: 1, yoyo: true});
+      TweenMax.to(o.svg, 1, {scale: 0.95, transformOrigin: "center", ease: Power1.easeOut });
+    }
+  },
+  logoReleased: function() {
+    if (!o.data.playing) {
+      TweenMax.to(o.svg, 0.1, {scale: 1, transformOrigin: "center", ease: Power4.easeOut });
       o.start();
     }
   },
