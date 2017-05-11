@@ -375,8 +375,9 @@ var o = {
   // Bind events
   bindEvents: function() {
     o.svg.addEventListener("mousedown", o.logoClicked);
-    o.svg.addEventListener("mouseup", o.logoReleased);
     o.svg.addEventListener("touchstart", o.logoClicked);
+    o.svg.addEventListener("mouseup", o.logoReleased);
+    o.svg.addEventListener("touchend", o.logoReleased);
   },
   logoClicked: function() {
     if (!o.data.playing) {
