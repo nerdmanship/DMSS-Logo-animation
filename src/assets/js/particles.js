@@ -1,4 +1,4 @@
-class Particle2 {
+class ParticleNode {
   
   constructor(radius, cx, cy) {
 
@@ -17,7 +17,7 @@ class Particle2 {
 
 }
 
-class svgNode {
+class SvgNode {
   constructor(w, h) {
     this.target = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     this.target.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -27,5 +27,18 @@ class svgNode {
   
   appendTo(parent) {
     parent.appendChild(this.target);
+  }
+
+  prependFirstChildOf(parent) {
+    parent.insertBefore(this.target, parent.childNodes[0]);
+  }
+
+  style(string){
+    this.target.setAttribute("style", "overflow: visible; position: absolute; " + string);
+  }
+
+  setDepth(z) {
+    var string = this.target.getAttribute("style");
+    this.target.setAttribute("style", string + " z-index: " + z + ";");
   }
 }

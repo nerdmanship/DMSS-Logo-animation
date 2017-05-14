@@ -27,25 +27,17 @@
     // Apply random position on particle range
   // Apply timing of contraction
 
+  // Add idle float animation
+    // All particles move randomly around a point all the time
+    // Add modifiers plugin with a switch
+      // If playing, move value to 0
+      // Not playing, organic movement
 
 
 
 
+// @codekit-prepend '../assets/js/particles';
+// @codekit-prepend 'ctaSetup';
+// @codekit-prepend 'ctaParticles';
 
-var targets = [];
-var btn = new Target("button");
-targets.push(btn);
-
-window.addEventListener("resize", updateTargets);
-
-function updateTargets() {
-  targets.forEach(function(target){
-    target.updateData();
-  });
-}
-var svgNode = new svgNode(btn.cx, btn.cy);
-svgNode.appendTo(document.body);
-
-var p = new Particle2("20");
-p.target.setAttribute("fill", "black");
-p.appendTo(svgNode.target);
+ctaAnimation("button");

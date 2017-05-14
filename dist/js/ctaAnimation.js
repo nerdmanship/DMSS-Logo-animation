@@ -232,6 +232,3 @@ function contractBtnParticles() {
 // @codekit-prepend 'ctaParticles';
 
 ctaAnimation("button");
-"use strict";
-
-animateLogo("wrapper");

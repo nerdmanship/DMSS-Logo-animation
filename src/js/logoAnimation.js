@@ -1,3 +1,5 @@
+// @codekit-prepend '../assets/js/utility';
+
 function animateLogo(id) {
   o.init(id);
 }
@@ -399,10 +401,12 @@ var o = {
     var tl = new TimelineMax({ paused: true, onComplete: function() { o.data.playing = false } });
     var rectsTimeline = o.getRectsTl();
     var charsTimeline = o.getCharsTl();
-    
+
     tl
+      .add(contractBtnParticles, 0)
       .add(rectsTimeline, 1)
       .add(charsTimeline, 1)
+      .add(expandBtnParticles, 8)
     ;
     
     return tl;
@@ -515,12 +519,3 @@ var o = {
     });
   }
 };
-
-function random(min, max) {
-  if (max === null) { max = min; min = 0; }
-  return Math.random() * (max - min) + min;
-}
-
-function map(value, sourceMin, sourceMax, destinationMin, destinationMax) {
-  return destinationMin + (destinationMax - destinationMin) * ((value - sourceMin) / (sourceMax - sourceMin)) || 0;
-}
