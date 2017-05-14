@@ -3020,6 +3020,33 @@
 		"opt": 1,
 		"q": 100
 		},
+	"\/src\/assets\/js\/controls.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "\/dist\/assets\/js\/controls.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/js\/particles.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/js\/particles.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/js\/utility.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "\/dist\/assets\/js\/utility.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
 	"\/src\/favicon.ico": {
 		"ft": 8192,
 		"oA": 2,
@@ -3033,6 +3060,15 @@
 		"oAP": "\/dist\/index.html",
 		"oF": 1,
 		"oS": 0
+		},
+	"\/src\/js\/ctaAnimation.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/js\/ctaAnimation.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
 		},
 	"\/src\/js\/ex-app.js": {
 		"ft": 64,
@@ -3076,6 +3112,23 @@
 		"oAP": "\/dist\/js\/logoAnimation.min.js.map",
 		"oF": 0
 		},
+	"\/src\/js\/target.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/js\/target.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/pug\/cta.pug": {
+		"cOD": 1,
+		"ft": 512,
+		"oA": 1,
+		"oAP": "\/dist\/pug\/cta.html",
+		"oF": 0,
+		"oS": 0
+		},
 	"\/src\/pug\/head.pug": {
 		"cOD": 1,
 		"ft": 512,
@@ -3105,6 +3158,14 @@
 		"ft": 512,
 		"oA": 1,
 		"oAP": "\/dist\/pug\/scripts.html",
+		"oF": 0,
+		"oS": 0
+		},
+	"\/src\/pug\/space.pug": {
+		"cOD": 1,
+		"ft": 512,
+		"oA": 1,
+		"oAP": "\/dist\/pug\/space.html",
 		"oF": 0,
 		"oS": 0
 		},
@@ -3138,6 +3199,28 @@
 "hooks": [
 	],
 "manualImportLinks": {
+	"\/src\/js\/ctaAnimation.js": [
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/src\/assets\/js\/particles.js",
+			"position": 0,
+			"type": 0
+			},
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/src\/js\/target.js",
+			"position": 1,
+			"type": 0
+			}
+		],
+	"\/src\/js\/index.js": [
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/src\/js\/ctaAnimation.js",
+			"position": 0,
+			"type": 0
+			}
+		],
 	"\/src\/js\/logoAnimation.js": [
 		{
 			"followForSyntaxChecking": 1,
@@ -3164,7 +3247,7 @@
 	"displayValue": "dmss",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-angryBaby",
-	"lastBuiltDate": 516200132
+	"lastBuiltDate": 516370492
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
