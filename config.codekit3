@@ -3023,9 +3023,9 @@
 	"\/src\/assets\/js\/controls.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "\/dist\/assets\/js\/controls.js",
-		"oF": 0,
+		"oF": 1,
 		"sC": 1,
 		"tS": 1
 		},
@@ -3067,15 +3067,6 @@
 		"oA": 0,
 		"oAP": "\/dist\/js\/ctaAnimation.js",
 		"oF": 1,
-		"sC": 1,
-		"tS": 1
-		},
-	"\/src\/js\/ctaParticles.js": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "\/dist\/js\/ctaParticles.js",
-		"oF": 0,
 		"sC": 1,
 		"tS": 1
 		},
@@ -3244,7 +3235,7 @@
 	"displayValue": "dmss",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-angryBaby",
-	"lastBuiltDate": 516676470
+	"lastBuiltDate": 516681132
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
