@@ -33,11 +33,20 @@
       // If playing, move value to 0
       // Not playing, organic movement
 
+  // Make interactive
+    // Hover logo - factor : 0.9
+    // Unhover logo - factor : 1
+    // Click logo - factor : 0.8
+    // Hover button - factor : 0.9
+    // Unhover button - factor : 1
+    // When logo expands - factor : 0
+    // When logo contracts - factor : 1
+
 
 
 
 // @codekit-prepend '../assets/js/particles';
 // @codekit-prepend 'ctaSetup';
-// @codekit-prepend 'ctaParticles';
+
 
 ctaAnimation("button");

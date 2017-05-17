@@ -403,10 +403,10 @@ var o = {
     var charsTimeline = o.getCharsTl();
 
     tl
-      .add(contractBtnParticles, 0)
-      .add(rectsTimeline, 1)
-      .add(charsTimeline, 1)
-      .add(expandBtnParticles, 8)
+      .call(setInteractionFactor, ["expand"], this, 1.4)
+      .add(rectsTimeline, 0)
+      .add(charsTimeline, 0)
+      .call(setInteractionFactor, ["contract"], this, 7.5)
     ;
     
     return tl;
