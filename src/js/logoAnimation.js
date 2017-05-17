@@ -376,6 +376,8 @@ var o = {
   },
   // Bind events
   bindEvents: function() {
+    o.svg.addEventListener("mouseover", o.logoHovered);
+    o.svg.addEventListener("mouseout", o.logoUnhovered);
     o.svg.addEventListener("mousedown", o.logoClicked);
     o.svg.addEventListener("touchstart", o.logoClicked);
     o.svg.addEventListener("mouseup", o.logoReleased);
@@ -390,6 +392,16 @@ var o = {
     if (!o.data.playing) {
       TweenMax.to(o.svg, 0.1, {scale: 1, transformOrigin: "center", ease: Power4.easeOut });
       o.start();
+    }
+  },
+  logoHovered: function() {
+    if (!o.data.playing) {
+      TweenMax.to(o.svg, 1, {scale: 1.05, transformOrigin: "center", ease: Power2.easeOut });
+    }
+  },
+  logoUnhovered: function() {
+    if (!o.data.playing) {
+      TweenMax.to(o.svg, 1, {scale: 1, transformOrigin: "center", ease: Power1.easeOut });
     }
   },
   start: function() {

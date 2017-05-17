@@ -42,11 +42,19 @@
     // When logo expands - factor : 0
     // When logo contracts - factor : 1
 
+  // Functionality, usability, aestetics, tweak, API
+
+  // Make private?
 
 
 
-// @codekit-prepend '../assets/js/particles';
+
+// @codekit-prepend '../assets/js/Proxy';
+// @codekit-prepend '../assets/js/SvgNode';
+// @codekit-prepend '../assets/js/ParticleNode';
 // @codekit-prepend 'ctaSetup';
 
 
-ctaAnimation("button");
+
+// Button must have a z-index
+animateButton("button");

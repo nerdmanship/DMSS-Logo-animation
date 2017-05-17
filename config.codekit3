@@ -3029,11 +3029,29 @@
 		"sC": 1,
 		"tS": 1
 		},
-	"\/src\/assets\/js\/particles.js": {
+	"\/src\/assets\/js\/ParticleNode.js": {
 		"ft": 64,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "\/dist\/assets\/js\/particles.js",
+		"oAP": "\/dist\/assets\/js\/ParticleNode.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/js\/Proxy.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/js\/Proxy.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/js\/SvgNode.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/js\/SvgNode.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 1
@@ -3106,11 +3124,11 @@
 		"sC": 1,
 		"tS": 1
 		},
-	"\/src\/js\/target.js": {
+	"\/src\/js\/Proxy.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 1,
-		"oAP": "\/dist\/js\/target.js",
+		"oA": 0,
+		"oAP": "\/dist\/js\/Proxy.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 1
@@ -3163,6 +3181,19 @@
 		"oF": 0,
 		"oS": 0
 		},
+	"\/src\/scss\/_buttons.scss": {
+		"aP": 1,
+		"bl": 1,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/dist\/scss\/_buttons.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/src\/scss\/_custom.scss": {
 		"aP": 1,
 		"bl": 1,
@@ -3193,14 +3224,6 @@
 "hooks": [
 	],
 "manualImportLinks": {
-	"\/src\/js\/ctaAnimation.js": [
-		{
-			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/src\/js\/target.js",
-			"position": 0,
-			"type": 0
-			}
-		],
 	"\/src\/js\/index.js": [
 		{
 			"followForSyntaxChecking": 1,
@@ -3235,7 +3258,7 @@
 	"displayValue": "dmss",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-angryBaby",
-	"lastBuiltDate": 516681132
+	"lastBuiltDate": 516699814
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,

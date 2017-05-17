@@ -15,6 +15,10 @@ class ParticleNode {
     parent.appendChild(this.target);
   }
 
+  setColor(color) {
+    this.target.setAttribute("fill", color);
+  }
+
   animate(obj) {
     var p = this;
     var spread = 1.75;
@@ -64,28 +68,3 @@ class ParticleNode {
 
 }
 
-class SvgNode {
-  constructor(w, h) {
-    this.target = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    this.target.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    this.target.setAttribute("xlinkns", "http://www.w3.org/1999/xlink");
-    this.target.setAttribute("viewBox", "0 0 " + w + " " + h);
-  }
-  
-  appendTo(parent) {
-    parent.appendChild(this.target);
-  }
-
-  prependFirstChildOf(parent) {
-    parent.insertBefore(this.target, parent.childNodes[0]);
-  }
-
-  style(string){
-    this.target.setAttribute("style", "overflow: visible; position: absolute; " + string);
-  }
-
-  setDepth(z) {
-    var string = this.target.getAttribute("style");
-    this.target.setAttribute("style", string + " z-index: " + z + ";");
-  }
-}

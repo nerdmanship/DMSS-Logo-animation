@@ -1,80 +1,90 @@
-var countBtnParticles = 80;
-var particleContainer;
-var btnParticles = [];
-var obj;
+// var CSS_COLOR_NAMES = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
 
-function ctaAnimation(btn) {
-  createParticleTarget(btn);
+// Check pub-sub pattern and rework event listeners
+// Make class related functionality into methods of extended classes
+  // findZofTarget method of Proxy
+  // SvgNode extends Proxy
+    // SvgNode : updateContainerStyles
+  // ParticleNode extends SvgNode
+// Make particle button class
+  // Options: particleRadius, particleCount, particleColors animation{}
+
+
+var els = [];
+
+function animateButton(id, count) {
+
+  var proxy = new Proxy(id);
+  proxy.count = count || 80;
+  proxy.particles = [];
+  proxy.colors = o.data.colors.rects;
+
+  var el = new SvgNode();
+  el.addProxy(proxy);
+
+  el.proxy.updateData();
+  el.updateFromProxy();
+
+  addParticles(el);
+
+  els.push(el);
+  el.prependIn(document.body);
+
+  
+  bindBtnEvents(proxy);
 }
 
-function createParticleTarget(btn) {
-  obj = new Target(btn);
-  createParticleContainer();
-  styleParticleContainer();
-  createBtnParticles();
-  bindBtnEvents();
-}
+function addParticles(el) {
+  for ( var i = 0; i < el.proxy.count; i++) {
 
-function createParticleContainer() {
-  particleContainer = new SvgNode(obj.w, obj.h);
-  particleContainer.prependFirstChildOf(document.body);
-}
-
-function styleParticleContainer() {
-  var styles = `top: ${obj.y}px; left: ${obj.x}px; width: ${obj.w}px; height: ${obj.h}px;`;
-  particleContainer.style(styles);
-  particleContainer.setDepth(100);
-}
-
-function createBtnParticles() {
-  for ( var i = 0; i < countBtnParticles; i++) {
-    var p = new ParticleNode("8", obj.w/2, obj.h/2);
-    p.target.setAttribute("fill", o.data.colors.rects[randomInt(0,3)]);
+    var p = new ParticleNode("8", el.proxy.w/2, el.proxy.h/2);
     
+    p.setColor(el.proxy.colors[randomInt(0, el.proxy.colors.length -1 )]);
     
-    p.appendTo(particleContainer.target);
-    btnParticles.push(p);
+    p.appendTo(el.target);
+    el.proxy.particles.push(p);
     
-    p.animate(obj);
+    //p.animate();
   }
 }
 
 
-function bindBtnEvents() {
-  var btn = obj.target;
+function bindBtnEvents(proxy) {
+  
   var svg = document.querySelector("[data-dmss=svg]");
 
   window.addEventListener("resize", function() { resize(); });
   
   // Button interaction: over, out and click
-  btn.addEventListener("mouseover", function() { 
-    setInteractionFactor("over");
+  proxy.element.addEventListener("mouseover", function(proxy) { 
+    setInteractionFactor("over", proxy);
    });
-  btn.addEventListener("mouseout", function() { 
-    setInteractionFactor("out");
+  proxy.element.addEventListener("mouseout", function(proxy) { 
+    setInteractionFactor("out", proxy);
    });
-  btn.addEventListener("mousedown", function() { 
-    setInteractionFactor("down");
+  proxy.element.addEventListener("mousedown", function(proxy) { 
+    setInteractionFactor("down", proxy);
    });
-  btn.addEventListener("mouseup", function() { 
-    setInteractionFactor("up");
+  proxy.element.addEventListener("mouseup", function(proxy) { 
+    setInteractionFactor("up", proxy);
    });
   // Button interaction: over, out and click
-  svg.addEventListener("mouseover", function() { 
-    setInteractionFactor("over");
+  svg.addEventListener("mouseover", function(proxy) { 
+    setInteractionFactor("over", proxy);
    });
-  svg.addEventListener("mouseout", function() { 
-    setInteractionFactor("out");
+  svg.addEventListener("mouseout", function(proxy) { 
+    setInteractionFactor("out", proxy);
    });
-  svg.addEventListener("mousedown", function() { 
-    setInteractionFactor("down");
+  svg.addEventListener("mousedown", function(proxy) { 
+    setInteractionFactor("down", proxy);
    });
-  svg.addEventListener("mouseup", function() { 
-    setInteractionFactor("up");
+  svg.addEventListener("mouseup", function(proxy) { 
+    setInteractionFactor("up", proxy);
   });
 }
 
 function setInteractionFactor(type) {
+  
   var factor;
   var update = false;
 
@@ -121,71 +131,50 @@ function setInteractionFactor(type) {
 
   // Apply factor
   if (update) {
-    
-    for(var i = 0; i < countBtnParticles; i++) {
-      btnParticles[i].interactionFactor = factor;
-    }
+    els.forEach(function(el) {
+      for(var i = 0; i < el.proxy.count; i++) {
+        el.proxy.particles[i].interactionFactor = factor;
+      }
+    });
 
   }
-/*  
-  var factor;
-
-  // Set factor
-  if ( !o.data.playing && (type === "over" || type === "out" || type === "click") ) {
-    switch (type) {
-      case 'over':
-        factor = 0.9;
-        break;
-      case 'out':
-        factor = 1;
-        break;
-      case 'down':
-        factor = 0.8;
-        break;
-      case 'up':
-        factor = 0.9;
-        break;
-      default:
-        factor = 1;
-      }
-    
-  } else if( o.data.playing && (type === "expand" || type === "contract") ) {
-      console.log("Request type: " + type);
-      switch (type) {
-      case 'expand':
-        factor = 0;
-        break;
-      case 'contract':
-        factor = 1;
-        break;
-      default:
-        console.warn("Default triggered");
-        factor = 0;
-      }
-  }*/
-
 }
 
 function resize() {
-  updateTargets();
-  setTimeout(function() {
-    styleParticleContainer();
-  }, 50);
+  els.forEach(function(el) {
+    el.proxy.updateData();
+    el.updateFromProxy();
+  });
 }
 
-function updateTargets() {
-    obj.updateData();
-}
+
+
+
+
 
 
 
 
 /*
-function init(target) {
-  var target = createParticleTarget();
-  createParticleContainer(target);
-  styleParticleContainer(target);
-  createBtnParticles(target);
-  animBtnParticles(target);
-  bindEvents(target);
-}*/
+
+// createContainer(proxy);
+
+function createContainer(proxy) {
+  //proxy.parent = new SvgNode(proxy.w, proxy.h);
+  //proxy.parent.prependIn(document.body);
+  //updateContainerStyles(proxy);
+  //addParticles(proxy);
+}
+
+function updateElement(el) {
+  //el.updateFromProxy();
+}
+
+
+function updateTargets() {
+  proxies.forEach(function(proxy) {
+    
+  });
+}
+
+*/

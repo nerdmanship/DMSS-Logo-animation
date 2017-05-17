@@ -4,38 +4,129 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Target = function () {
-  function Target(id) {
-    _classCallCheck(this, Target);
+var Proxy = function () {
+  function Proxy(id) {
+    _classCallCheck(this, Proxy);
 
-    this.target = document.querySelector("#" + id);
-    this.x = 0;
-    this.y = 0;
-    this.w = 0;
-    this.h = 0;
-    this.cx = 0;
-    this.cy = 0;
+    this.element = document.querySelector("#" + id); // master of proxy
+    this.x = 0; // x position
+    this.y = 0; // y position
+    this.z = 0; // z-index
+    this.w = 0; // width
+    this.h = 0; // height
+    this.cx = 0; // center x
+    this.cy = 0; // center y
     this.updateData();
   }
 
-  _createClass(Target, [{
+  _createClass(Proxy, [{
     key: "updateData",
     value: function updateData() {
-      // pixels from top
-      this.y = window.pageYOffset + this.target.getBoundingClientRect().top;
-      // pixels from left
-      this.x = window.pageXOffset + this.target.getBoundingClientRect().left;
-      // width of el
-      this.w = this.target.offsetWidth;
-      // height of el
-      this.h = this.target.offsetHeight;
-      // particle center
+      this.y = window.pageYOffset + this.element.getBoundingClientRect().top;
+      this.x = window.pageXOffset + this.element.getBoundingClientRect().left;
+      this.z = this.findElementZ() - 1;
+      this.w = this.element.offsetWidth;
+      this.h = this.element.offsetHeight;
       this.cx = this.x + this.w / 2;
       this.cy = this.y + this.h / 2;
     }
+  }, {
+    key: "findElementZ",
+    value: function findElementZ() {
+      var z;
+      var elZ = window.getComputedStyle(this.element).getPropertyValue("z-index");
+      if (isNaN(elZ)) {
+        z = 0;
+        throw "Error: Button must have a set z-index value.";
+      } else {
+        z = elZ;
+      }
+
+      return z;
+    }
   }]);
 
-  return Target;
+  return Proxy;
+}();
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var SvgNode = function () {
+  function SvgNode() {
+    _classCallCheck(this, SvgNode);
+
+    this.target = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    this.target.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    this.target.setAttribute("xlinkns", "http://www.w3.org/1999/xlink");
+    this.target.setAttribute("style", "overflow: visible; position: absolute;");
+  }
+
+  _createClass(SvgNode, [{
+    key: "appendTo",
+    value: function appendTo(parent) {
+      parent.appendChild(this.target);
+    }
+  }, {
+    key: "prependIn",
+    value: function prependIn(parent) {
+      parent.insertBefore(this.target, parent.childNodes[0]);
+    }
+  }, {
+    key: "setViewbox",
+    value: function setViewbox(x, y, w, h) {
+      this.target.setAttribute("viewBox", x + " " + y + " " + w + " " + h);
+    }
+  }, {
+    key: "setPosition",
+    value: function setPosition(x, y) {
+      this.target.setAttribute("left", x);
+      this.target.setAttribute("top", y);
+    }
+  }, {
+    key: "setDimensions",
+    value: function setDimensions(w, h) {
+      this.target.setAttribute("width", w);
+      this.target.setAttribute("height", h);
+    }
+  }, {
+    key: "setDepth",
+    value: function setDepth(z) {
+      this.target.setAttribute("z-index", z);
+    }
+
+    // Break out to own extended class : particleContainer
+
+  }, {
+    key: "addParticles",
+    value: function addParticles(count) {}
+
+    // Break out to own extended class
+
+  }, {
+    key: "addProxy",
+    value: function addProxy(obj) {
+      this.proxy = obj;
+    }
+
+    // Break out to own extended class
+
+  }, {
+    key: "updateViewboxFromProxy",
+    value: function updateViewboxFromProxy() {
+      this.setViewbox(0, 0, this.proxy.w, this.proxy.h);
+    }
+  }, {
+    key: "updateFromProxy",
+    value: function updateFromProxy() {
+      var string = "overflow: visible; position: absolute; height: " + this.proxy.h + "px; width: " + this.proxy.w + "px; top: " + this.proxy.y + "px; left: " + this.proxy.x + "px; z-index: " + this.proxy.z + ";";
+      this.target.setAttribute("style", string);
+    }
+  }]);
+
+  return SvgNode;
 }();
 "use strict";
 
@@ -60,6 +151,11 @@ var ParticleNode = function () {
     key: "appendTo",
     value: function appendTo(parent) {
       parent.appendChild(this.target);
+    }
+  }, {
+    key: "setColor",
+    value: function setColor(color) {
+      this.target.setAttribute("fill", color);
     }
   }, {
     key: "animate",
@@ -119,86 +215,59 @@ var ParticleNode = function () {
 
   return ParticleNode;
 }();
-
-var SvgNode = function () {
-  function SvgNode(w, h) {
-    _classCallCheck(this, SvgNode);
-
-    this.target = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    this.target.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    this.target.setAttribute("xlinkns", "http://www.w3.org/1999/xlink");
-    this.target.setAttribute("viewBox", "0 0 " + w + " " + h);
-  }
-
-  _createClass(SvgNode, [{
-    key: "appendTo",
-    value: function appendTo(parent) {
-      parent.appendChild(this.target);
-    }
-  }, {
-    key: "prependFirstChildOf",
-    value: function prependFirstChildOf(parent) {
-      parent.insertBefore(this.target, parent.childNodes[0]);
-    }
-  }, {
-    key: "style",
-    value: function style(string) {
-      this.target.setAttribute("style", "overflow: visible; position: absolute; " + string);
-    }
-  }, {
-    key: "setDepth",
-    value: function setDepth(z) {
-      var string = this.target.getAttribute("style");
-      this.target.setAttribute("style", string + " z-index: " + z + ";");
-    }
-  }]);
-
-  return SvgNode;
-}();
 "use strict";
 
-var countBtnParticles = 80;
-var particleContainer;
-var btnParticles = [];
-var obj;
+// var CSS_COLOR_NAMES = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
 
-function ctaAnimation(btn) {
-  createParticleTarget(btn);
+// Check pub-sub pattern and rework event listeners
+// Make class related functionality into methods of extended classes
+// findZofTarget method of Proxy
+// SvgNode extends Proxy
+// SvgNode : updateContainerStyles
+// ParticleNode extends SvgNode
+// Make particle button class
+// Options: particleRadius, particleCount, particleColors animation{}
+
+
+var els = [];
+
+function animateButton(id, count) {
+
+  var proxy = new Proxy(id);
+  proxy.count = count || 80;
+  proxy.particles = [];
+  proxy.colors = o.data.colors.rects;
+
+  var el = new SvgNode();
+  el.addProxy(proxy);
+
+  el.proxy.updateData();
+  el.updateFromProxy();
+
+  addParticles(el);
+
+  els.push(el);
+  el.prependIn(document.body);
+
+  bindBtnEvents(proxy);
 }
 
-function createParticleTarget(btn) {
-  obj = new Target(btn);
-  createParticleContainer();
-  styleParticleContainer();
-  createBtnParticles();
-  bindBtnEvents();
-}
+function addParticles(el) {
+  for (var i = 0; i < el.proxy.count; i++) {
 
-function createParticleContainer() {
-  particleContainer = new SvgNode(obj.w, obj.h);
-  particleContainer.prependFirstChildOf(document.body);
-}
+    var p = new ParticleNode("8", el.proxy.w / 2, el.proxy.h / 2);
 
-function styleParticleContainer() {
-  var styles = "top: " + obj.y + "px; left: " + obj.x + "px; width: " + obj.w + "px; height: " + obj.h + "px;";
-  particleContainer.style(styles);
-  particleContainer.setDepth(100);
-}
+    p.setColor(el.proxy.colors[randomInt(0, el.proxy.colors.length - 1)]);
 
-function createBtnParticles() {
-  for (var i = 0; i < countBtnParticles; i++) {
-    var p = new ParticleNode("8", obj.w / 2, obj.h / 2);
-    p.target.setAttribute("fill", o.data.colors.rects[randomInt(0, 3)]);
+    p.appendTo(el.target);
+    el.proxy.particles.push(p);
 
-    p.appendTo(particleContainer.target);
-    btnParticles.push(p);
-
-    p.animate(obj);
+    //p.animate();
   }
 }
 
-function bindBtnEvents() {
-  var btn = obj.target;
+function bindBtnEvents(proxy) {
+
   var svg = document.querySelector("[data-dmss=svg]");
 
   window.addEventListener("resize", function () {
@@ -206,34 +275,35 @@ function bindBtnEvents() {
   });
 
   // Button interaction: over, out and click
-  btn.addEventListener("mouseover", function () {
-    setInteractionFactor("over");
+  proxy.element.addEventListener("mouseover", function (proxy) {
+    setInteractionFactor("over", proxy);
   });
-  btn.addEventListener("mouseout", function () {
-    setInteractionFactor("out");
+  proxy.element.addEventListener("mouseout", function (proxy) {
+    setInteractionFactor("out", proxy);
   });
-  btn.addEventListener("mousedown", function () {
-    setInteractionFactor("down");
+  proxy.element.addEventListener("mousedown", function (proxy) {
+    setInteractionFactor("down", proxy);
   });
-  btn.addEventListener("mouseup", function () {
-    setInteractionFactor("up");
+  proxy.element.addEventListener("mouseup", function (proxy) {
+    setInteractionFactor("up", proxy);
   });
   // Button interaction: over, out and click
-  svg.addEventListener("mouseover", function () {
-    setInteractionFactor("over");
+  svg.addEventListener("mouseover", function (proxy) {
+    setInteractionFactor("over", proxy);
   });
-  svg.addEventListener("mouseout", function () {
-    setInteractionFactor("out");
+  svg.addEventListener("mouseout", function (proxy) {
+    setInteractionFactor("out", proxy);
   });
-  svg.addEventListener("mousedown", function () {
-    setInteractionFactor("down");
+  svg.addEventListener("mousedown", function (proxy) {
+    setInteractionFactor("down", proxy);
   });
-  svg.addEventListener("mouseup", function () {
-    setInteractionFactor("up");
+  svg.addEventListener("mouseup", function (proxy) {
+    setInteractionFactor("up", proxy);
   });
 }
 
 function setInteractionFactor(type) {
+
   var factor;
   var update = false;
 
@@ -280,69 +350,44 @@ function setInteractionFactor(type) {
 
   // Apply factor
   if (update) {
-
-    for (var i = 0; i < countBtnParticles; i++) {
-      btnParticles[i].interactionFactor = factor;
-    }
+    els.forEach(function (el) {
+      for (var i = 0; i < el.proxy.count; i++) {
+        el.proxy.particles[i].interactionFactor = factor;
+      }
+    });
   }
-  /*  
-    var factor;
-  
-    // Set factor
-    if ( !o.data.playing && (type === "over" || type === "out" || type === "click") ) {
-      switch (type) {
-        case 'over':
-          factor = 0.9;
-          break;
-        case 'out':
-          factor = 1;
-          break;
-        case 'down':
-          factor = 0.8;
-          break;
-        case 'up':
-          factor = 0.9;
-          break;
-        default:
-          factor = 1;
-        }
-      
-    } else if( o.data.playing && (type === "expand" || type === "contract") ) {
-        console.log("Request type: " + type);
-        switch (type) {
-        case 'expand':
-          factor = 0;
-          break;
-        case 'contract':
-          factor = 1;
-          break;
-        default:
-          console.warn("Default triggered");
-          factor = 0;
-        }
-    }*/
 }
 
 function resize() {
-  updateTargets();
-  setTimeout(function () {
-    styleParticleContainer();
-  }, 50);
-}
-
-function updateTargets() {
-  obj.updateData();
+  els.forEach(function (el) {
+    el.proxy.updateData();
+    el.updateFromProxy();
+  });
 }
 
 /*
-function init(target) {
-  var target = createParticleTarget();
-  createParticleContainer(target);
-  styleParticleContainer(target);
-  createBtnParticles(target);
-  animBtnParticles(target);
-  bindEvents(target);
-}*/
+
+// createContainer(proxy);
+
+function createContainer(proxy) {
+  //proxy.parent = new SvgNode(proxy.w, proxy.h);
+  //proxy.parent.prependIn(document.body);
+  //updateContainerStyles(proxy);
+  //addParticles(proxy);
+}
+
+function updateElement(el) {
+  //el.updateFromProxy();
+}
+
+
+function updateTargets() {
+  proxies.forEach(function(proxy) {
+    
+  });
+}
+
+*/
 "use strict";
 
 // DEFINITION
@@ -389,9 +434,16 @@ function init(target) {
 // When logo expands - factor : 0
 // When logo contracts - factor : 1
 
+// Functionality, usability, aestetics, tweak, API
 
-// @codekit-prepend '../assets/js/particles';
+// Make private?
+
+
+// @codekit-prepend '../assets/js/Proxy';
+// @codekit-prepend '../assets/js/SvgNode';
+// @codekit-prepend '../assets/js/ParticleNode';
 // @codekit-prepend 'ctaSetup';
 
 
-ctaAnimation("button");
+// Button must have a z-index
+animateButton("button");
