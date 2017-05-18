@@ -1,37 +1,54 @@
-# Logo animation for DMSS – Digital Marketing Skill Share
-## The next iteration of Digital Marketing Conferences
+# Logo animation for DMSS Conference
+### Digital Marketing Skill Share – the next iteration of Digital Marketing Conferences
 
-This animation illustrates how DMSS is a conference all about sharing actionable skills. The logotype iterates from its first static state into a new dynamic state in which each node organically fuels the collective center.
+This is an interactive logo animation that aims to illustrate how DMSS is a conference all about sharing actionable skills. The logotype iterates from its first static state into a new dynamic state in which each node organically fuels the collective center. When the logotype is done animating the animation guides the users attention to the call to action by moving the particles there.
 
-**Cool stuff about this project:**
-* The project consists of one javascript file only
-* The whole project weigh only **47KB compressed** including dependencies
-* All graphics are dynamically created and animated
-* You just link it, choose a div and push start
+### [Launch project](https://nerdmanship.github.io/DMSS-Logo-animation/dist)
 
 ## Links
 
-### [Nerdmanship Custom](http://www.nerdmanship.com/) (Author)
-### [Launch project](https://nerdmanship.github.io/DMSS-Logo-animation/dist)
-### [Live website](https://www.dmss.io/) (Coming soon)
+* #### [Nerdmanship Custom](http://www.nerdmanship.com/) (Author)
+* #### [Live website](https://www.dmss.io/) (dmss.io)
 
-## How to use
-  
-Could not be easier.
 
-1. Grab [logoAnimation.min.js](https://github.com/nerdmanship/DMSS-Logo-animation/blob/master/dist/js/logoAnimation.min.js) in /dist/js/ and link in the page head.
+## `Usage`
 
-`<script type="text/javascript" src="logoAnimation.min.js"></script>`
+1. **Download the scripts** to your javascript directory.
 
-2. Create a div wherever you want the logo on your page.
+Right click and choose 'save link as...' to save the files:
+* [logoAnimation.min.js](https://github.com/nerdmanship/DMSS-Logo-animation/blob/master/dist/js/logoAnimation.min.js)
+* [buttonAnimation.min.js](https://github.com/nerdmanship/DMSS-Logo-animation/blob/master/dist/js/buttonAnimation.min.js)
 
-`<div id="wrapper"></div>`
+** Note ** that these are the only files you need – the scripts create the graphics.
 
-3. Pass the div id as a string when you initialise the animation on page load.
+2. **Add the scripts** on your page:
 
-`window.addEventListener("load", animateLogo("wrapper");`
+```html
+<!-- Load the script in this order: -->
+<script type="text/javascript" src="logoAnimation.min.js"></script>
+<script type="text/javascript" src="buttonAnimation.min.js"></script>
+```
 
-You can position and style the div as you would with any normal image wrapper, including media queries. The logotype takes the dimension you give the wrapper, but the animation will go beyond those boarders in its expanded state.
+3. **Create a div** in which you want to place the animated logotype
+
+```html
+<!-- Give it an ID, i.e. "wrapper": -->
+<div id="wrapper"></div>
+```
+
+4. **Initialise the scripts** in your main js file, i.e. on page load.
+
+```js
+// The logo script takes two arguments: the div ID as a string and a delay in seconds (optional)
+window.addEventListener("load", animateLogo("wrapper", 2));
+
+// The button script takes one argument: the ID of the existing button which is to be animated
+// This button *MUST* have a z-index value
+window.addEventListener("load", animateButton("myButton"));
+```
+
+#### Further information
+You can position and style the div as you would with any normal image wrapper. The logotype will take the dimensions that you give the wrapper.
 
 ## Dependencies
 (Included in logoAnimation.min.js)
