@@ -235,13 +235,14 @@ var o = {
       current: {}
     }
   },
-  init: function(id) {
+  init: function(id, delay) {
+    delay = delay || 1;
     o.createSVG(id);
     o.cacheDOM();
     o.settings();
     o.bindEvents();
     o.createParticles();
-    o.start();
+    setTimeout( function() { o.start(); }, delay * 1000);
   },
   createSVG: function(id) {
     var rectNames = [ "rectS2", "rectS", "rectM", "rectD"];
