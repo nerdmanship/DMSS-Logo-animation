@@ -1,3 +1,6 @@
+// @codekit-prepend '../assets/js/utility';
+// @codekit-prepend '../assets/js/pubsub';
+
 function animateLogo(id) {
   o.init(id);
 }
@@ -374,10 +377,12 @@ var o = {
   },
   // Bind events
   bindEvents: function() {
+    o.svg.addEventListener("mouseover", o.logoHovered);
+    o.svg.addEventListener("mouseout", o.logoUnhovered);
     o.svg.addEventListener("mousedown", o.logoClicked);
-    o.svg.addEventListener("touchstart", o.logoClicked);
     o.svg.addEventListener("mouseup", o.logoReleased);
-    o.svg.addEventListener("touchend", o.logoReleased);
+    //o.svg.addEventListener("touchstart", o.logoClicked);
+    //o.svg.addEventListener("touchend", o.logoReleased);
   },
   logoClicked: function() {
     if (!o.data.playing) {
@@ -390,6 +395,18 @@ var o = {
       o.start();
     }
   },
+  logoHovered: function() {
+    if (!o.data.playing) {
+      events.emit("logoInteraction", "mouseover");
+      TweenMax.to(o.svg, 1, {scale: 1.05, transformOrigin: "center", ease: Power2.easeOut });
+    }
+  },
+  logoUnhovered: function() {
+    if (!o.data.playing) {
+      events.emit("logoInteraction", "mouseout");
+      TweenMax.to(o.svg, 1, {scale: 1, transformOrigin: "center", ease: Power1.easeOut });
+    }
+  },
   start: function() {
     o.data.playing = true;
     var master = o.getMasterTl();
@@ -399,13 +416,18 @@ var o = {
     var tl = new TimelineMax({ paused: true, onComplete: function() { o.data.playing = false } });
     var rectsTimeline = o.getRectsTl();
     var charsTimeline = o.getCharsTl();
-    
+
     tl
-      .add(rectsTimeline, 1)
-      .add(charsTimeline, 1)
+      .call(o.emit, ["logoMotion", "expansion"], this, 0)
+      .add(rectsTimeline, 0)
+      .add(charsTimeline, 0)
+      .call(o.emit, ["logoMotion", "contraction"], this, 7.2)
     ;
     
     return tl;
+  },
+  emit: function(eventName, data) {
+    events.emit(eventName, data);
   },
   getRectsTl: function() {
     
@@ -515,12 +537,3 @@ var o = {
     });
   }
 };
-
-function random(min, max) {
-  if (max === null) { max = min; min = 0; }
-  return Math.random() * (max - min) + min;
-}
-
-function map(value, sourceMin, sourceMax, destinationMin, destinationMax) {
-  return destinationMin + (destinationMax - destinationMin) * ((value - sourceMin) / (sourceMax - sourceMin)) || 0;
-}

@@ -2101,7 +2101,7 @@
 	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/easing\/CustomEase.min.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 2,
+		"oA": 1,
 		"oAP": "\/dist\/js\/CustomEase.min.js",
 		"oF": 3,
 		"sC": 1,
@@ -2200,7 +2200,7 @@
 	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/ModifiersPlugin.min.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 2,
+		"oA": 1,
 		"oAP": "\/dist\/js\/ModifiersPlugin.min.js",
 		"oF": 3,
 		"sC": 1,
@@ -2272,7 +2272,7 @@
 	"\/src\/assets\/greensock-js-with-customease\/src\/minified\/TweenMax.min.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 2,
+		"oA": 1,
 		"oAP": "\/dist\/js\/TweenMax.min.js",
 		"oF": 3,
 		"sC": 1,
@@ -2608,7 +2608,7 @@
 	"\/src\/assets\/GreenSock-ShockinglyGreen-js\/src\/minified\/plugins\/MorphSVGPlugin.min.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 2,
+		"oA": 1,
 		"oAP": "\/dist\/js\/MorphSVGPlugin.min.js",
 		"oF": 3,
 		"sC": 1,
@@ -3020,6 +3020,60 @@
 		"opt": 1,
 		"q": 100
 		},
+	"\/src\/assets\/js\/controls.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/js\/controls.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/js\/ParticleNode.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/js\/ParticleNode.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/js\/Proxy.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/js\/Proxy.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/js\/pubsub.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/js\/pubsub.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/js\/SvgNode.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/js\/SvgNode.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
+	"\/src\/assets\/js\/utility.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/js\/utility.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
 	"\/src\/favicon.ico": {
 		"ft": 8192,
 		"oA": 2,
@@ -3034,12 +3088,12 @@
 		"oF": 1,
 		"oS": 0
 		},
-	"\/src\/js\/ex-app.js": {
+	"\/src\/js\/ctaAnimation.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 1,
-		"oAP": "\/dist\/js\/ex-app.js",
-		"oF": 1,
+		"oA": 0,
+		"oAP": "\/dist\/js\/ctaAnimation.min.js",
+		"oF": 3,
 		"sC": 1,
 		"tS": 1
 		},
@@ -3054,27 +3108,20 @@
 		},
 	"\/src\/js\/logoAnimation.js": {
 		"ft": 64,
-		"mi": 1,
+		"mi": 0,
 		"oA": 0,
 		"oAP": "\/dist\/js\/logoAnimation.min.js",
 		"oF": 3,
 		"sC": 1,
 		"tS": 1
 		},
-	"\/src\/js\/logoAnimation.min.js": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "\/dist\/js\/logoAnimation.min.js",
+	"\/src\/pug\/cta.pug": {
+		"cOD": 1,
+		"ft": 512,
+		"oA": 1,
+		"oAP": "\/dist\/pug\/cta.html",
 		"oF": 0,
-		"sC": 1,
-		"tS": 1
-		},
-	"\/src\/js\/logoAnimation.min.js.map": {
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/dist\/js\/logoAnimation.min.js.map",
-		"oF": 0
+		"oS": 0
 		},
 	"\/src\/pug\/head.pug": {
 		"cOD": 1,
@@ -3108,6 +3155,27 @@
 		"oF": 0,
 		"oS": 0
 		},
+	"\/src\/pug\/space.pug": {
+		"cOD": 1,
+		"ft": 512,
+		"oA": 1,
+		"oAP": "\/dist\/pug\/space.html",
+		"oF": 0,
+		"oS": 0
+		},
+	"\/src\/scss\/_buttons.scss": {
+		"aP": 1,
+		"bl": 1,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/dist\/scss\/_buttons.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/src\/scss\/_custom.scss": {
 		"aP": 1,
 		"bl": 1,
@@ -3133,6 +3201,24 @@
 		"oF": 2,
 		"oS": 0,
 		"uL": 1
+		},
+	"\/src\/tasks.md": {
+		"cS": 0,
+		"eF": 1,
+		"eL": 1,
+		"eLB": 0,
+		"ema": 1,
+		"eSQ": 1,
+		"ft": 4096,
+		"oA": 1,
+		"oAP": "\/dist\/tasks.html",
+		"oF": 1,
+		"oFM": 0,
+		"oS": 0,
+		"pHT": 0,
+		"pME": 1,
+		"rFN": 0,
+		"uCM": 0
 		}
 	},
 "hooks": [
@@ -3140,19 +3226,19 @@
 "manualImportLinks": {
 	"\/src\/js\/logoAnimation.js": [
 		{
-			"followForSyntaxChecking": 1,
+			"followForSyntaxChecking": 0,
 			"linkedFileAbbreviatedPath": "\/src\/assets\/greensock-js-with-customease\/src\/minified\/TweenMax.min.js",
 			"position": 0,
 			"type": 0
 			},
 		{
-			"followForSyntaxChecking": 1,
+			"followForSyntaxChecking": 0,
 			"linkedFileAbbreviatedPath": "\/src\/assets\/greensock-js-with-customease\/src\/minified\/plugins\/ModifiersPlugin.min.js",
 			"position": 1,
 			"type": 0
 			},
 		{
-			"followForSyntaxChecking": 1,
+			"followForSyntaxChecking": 0,
 			"linkedFileAbbreviatedPath": "\/src\/assets\/GreenSock-ShockinglyGreen-js\/src\/minified\/plugins\/MorphSVGPlugin.min.js",
 			"position": 2,
 			"type": 0
@@ -3164,7 +3250,7 @@
 	"displayValue": "dmss",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-angryBaby",
-	"lastBuiltDate": 516200132
+	"lastBuiltDate": 516778689
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,

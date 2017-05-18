@@ -1,1 +1,2 @@
 animateLogo("wrapper");
+animateButton("button");

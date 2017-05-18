@@ -1,0 +1,32 @@
+.cta {
+  position: absolute;
+  top: 500px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 255px;
+  height: 50px;
+  background-color: rgb(192, 39, 95);
+  z-index: 101;
+}
+
+#button2 {
+  left: 20%;
+  background-color: rgb(39, 95, 192);
+}
+
+#button3 {
+  left: 80%;
+  background-color: rgb(95, 192, 39);
+}
+
+.link-style {
+  color: white;
+  text-decoration: none;
+  padding: 16px 61px;
+  display: block;
+}
+
+
+
+
+
