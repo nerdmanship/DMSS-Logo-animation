@@ -1,37 +1,44 @@
 class ParticleNode {
   
-  constructor(radius, cx, cy) {
-
+  constructor(radius) {
     this.target = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     this.target.setAttribute("r", radius);
-    
-    if (cx && cy) {
-      this.target.setAttribute("cx", cx);
-      this.target.setAttribute("cy", cy);
-    }
   }
 
   appendTo(parent) {
     parent.appendChild(this.target);
   }
 
+  setPositionData(cx, cy) {
+    this.target.setAttribute("cx", cx);
+    this.target.setAttribute("cy", cy);
+  }
+
   setColor(color) {
     this.target.setAttribute("fill", color);
   }
 
-  animate(obj) {
-    var p = this;
-    var spread = 1.75;
-
+  setAnimationData() {
     this.orbit = random(5, 30);
-    this.pointX = obj.w/spread * random(-1, 1);
-    this.pointY = obj.h/spread * random(-1, 1);
     this.sin = random(0, 2 * Math.PI );
     this.cos = random(0, 2 * Math.PI );
     this.acc = random(0.03, 0.2);
     this.speed = random(0.005, 0.01);
-    this.interactionFactor = 0;
+  }
 
+  setInteractionData(data) {
+    var factor = data || 0;
+    this.interactionFactor = factor;
+  }
+
+  updateFromProxy(proxy) {
+    this.pointX = proxy.w/1.75 * random(-1, 1);
+    this.pointY = proxy.h/1.75 * random(-1, 1);
+  }
+
+  swarm() {
+    var p = this;
+    
     function getVal(target, attr) {
       
       var orbit = p.orbit * p.interactionFactor;

@@ -448,6 +448,14 @@ template {
   background-color: #c0275f;
   z-index: 101; }
 
+#button2 {
+  left: 20%;
+  background-color: #275fc0; }
+
+#button3 {
+  left: 80%;
+  background-color: #5fc027; }
+
 .link-style {
   color: white;
   text-decoration: none;

@@ -1,60 +1,109 @@
-// DEFINITION
-// When the logo animation stops, the cta animation starts
-// Particles are born below the button
-// Particles have same colors and scale variations as in logo
-// Expands with same force as logotype contracts
-// Floats softly around the button
-// Contracts when the logo animation starts
-// Contracts with same force as logotype expands
-
-// TASKS
-
-// Get needed data
-  // Check button in dmss.io and make replica 
-  // Find button position and dimensions dynamically
-    // Get position on call and update on resize
-
-
-// Functionality for one
-  // Generate a particle at button center
-  // Expand at right time
-    // Expand to random position on a x-range and y-range based on buttons dimensions
-  // Contract at right time
-
-// Functionality for all
-  // Generate multiple particles
-  // Apply timing of expansion
-    // Apply random position on particle range
-  // Apply timing of contraction
-
-  // Add idle float animation
-    // All particles move randomly around a point all the time
-    // Add modifiers plugin with a switch
-      // If playing, move value to 0
-      // Not playing, organic movement
-
-  // Make interactive
-    // Hover logo - factor : 0.9
-    // Unhover logo - factor : 1
-    // Click logo - factor : 0.8
-    // Hover button - factor : 0.9
-    // Unhover button - factor : 1
-    // When logo expands - factor : 0
-    // When logo contracts - factor : 1
-
-  // Functionality, usability, aestetics, tweak, API
-
-  // Make private?
-
-
-
-
 // @codekit-prepend '../assets/js/Proxy';
 // @codekit-prepend '../assets/js/SvgNode';
 // @codekit-prepend '../assets/js/ParticleNode';
-// @codekit-prepend 'ctaSetup';
 
 
+var animateButton = (function(id, count) {
+  
+  var els = [];
 
-// Button must have a z-index
-animateButton("button");
+  var proxy = new Proxy(id);
+  proxy.count = count || 80;
+  proxy.particles = [];
+  proxy.colors = o.data.colors.rects;
+
+  var el = new SvgNode();
+  el.addProxy(proxy);
+
+  el.proxy.updateData();
+  el.updateFromProxy();
+
+  addParticles(el);
+
+  els.push(el);
+  el.prependIn(document.body);
+
+  bindEvents();
+
+
+function addParticles(el) {
+  for ( var i = 0; i < el.proxy.count; i++) {
+    var color = el.proxy.colors[randomInt(0, el.proxy.colors.length -1 )]; 
+    var p = new ParticleNode("8");
+    el.proxy.particles.push(p);
+    
+    p.setPositionData(el.proxy.w/2, el.proxy.h/2);
+    p.setColor(color);
+    p.setAnimationData();
+    p.setInteractionData();
+    p.updateFromProxy(el.proxy);
+    p.swarm();
+    
+    p.appendTo(el.target);
+  }
+}
+
+function bindEvents() {
+  els.forEach(function(el) {
+    el.proxy.parentElement.addEventListener("mouseover", function(e) { filterEvent(e); });
+    el.proxy.parentElement.addEventListener("mouseout", function(e) { filterEvent(e); });
+    el.proxy.parentElement.addEventListener("mousedown", function(e) { filterEvent(e); });
+    el.proxy.parentElement.addEventListener("mouseup", function(e) { filterEvent(e); });
+  });
+  events.on("logoInteraction", filterEvent);
+  events.on("logoMotion", filterEvent);
+  window.addEventListener("resize", updateElements);
+}
+
+function filterEvent(data) {
+  // Set event to mouse event or timeline event
+  var event = data.type || data;
+
+  switch (event) {
+  case 'mouseover':
+  case 'mouseup':
+    if ( !o.data.playing ) {
+      updateParticles(0.9);
+    }
+    break;
+  case 'mouseout':
+    if ( !o.data.playing ) {
+      updateParticles(1);
+    }
+    break;
+  case 'mousedown':
+    if ( !o.data.playing ) {
+      updateParticles(0.8);
+    }
+    break;
+  case 'expansion':
+    if ( o.data.playing ) {
+      updateParticles(0);
+    }
+    break;
+  case 'contraction':
+    if ( o.data.playing ) {
+      updateParticles(1);
+    }
+    break;
+  }
+}
+
+function updateParticles(data) {
+  els.forEach(function(el) {
+  
+    el.proxy.particles.forEach(function(p) {
+      p.setInteractionData(data);
+    });
+  
+  });
+}
+
+function updateElements() {
+  els.forEach(function(el) {
+    el.proxy.updateData();
+    el.updateFromProxy();
+  });
+}
+
+});

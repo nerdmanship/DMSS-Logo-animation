@@ -40,6 +40,7 @@ class SvgNode {
   // Break out to own extended class
   addProxy(obj) {
     this.proxy = obj;
+    this.target.setAttribute("id", "proxyOf" + obj.parentElement.id);
   }
   
   // Break out to own extended class

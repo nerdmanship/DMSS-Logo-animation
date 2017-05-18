@@ -3047,6 +3047,15 @@
 		"sC": 1,
 		"tS": 1
 		},
+	"\/src\/assets\/js\/pubsub.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/js\/pubsub.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 1
+		},
 	"\/src\/assets\/js\/SvgNode.js": {
 		"ft": 64,
 		"mi": 0,
@@ -3083,26 +3092,8 @@
 		"ft": 64,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "\/dist\/js\/ctaAnimation.js",
-		"oF": 1,
-		"sC": 1,
-		"tS": 1
-		},
-	"\/src\/js\/ctaSetup.js": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/dist\/js\/ctaSetup.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 1
-		},
-	"\/src\/js\/ex-app.js": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/dist\/js\/ex-app.js",
-		"oF": 1,
+		"oAP": "\/dist\/js\/ctaAnimation.min.js",
+		"oF": 3,
 		"sC": 1,
 		"tS": 1
 		},
@@ -3117,19 +3108,10 @@
 		},
 	"\/src\/js\/logoAnimation.js": {
 		"ft": 64,
-		"mi": 1,
+		"mi": 0,
 		"oA": 0,
 		"oAP": "\/dist\/js\/logoAnimation.min.js",
 		"oF": 3,
-		"sC": 1,
-		"tS": 1
-		},
-	"\/src\/js\/Proxy.js": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "\/dist\/js\/Proxy.js",
-		"oF": 0,
 		"sC": 1,
 		"tS": 1
 		},
@@ -3219,19 +3201,29 @@
 		"oF": 2,
 		"oS": 0,
 		"uL": 1
+		},
+	"\/src\/tasks.md": {
+		"cS": 0,
+		"eF": 1,
+		"eL": 1,
+		"eLB": 0,
+		"ema": 1,
+		"eSQ": 1,
+		"ft": 4096,
+		"oA": 1,
+		"oAP": "\/dist\/tasks.html",
+		"oF": 1,
+		"oFM": 0,
+		"oS": 0,
+		"pHT": 0,
+		"pME": 1,
+		"rFN": 0,
+		"uCM": 0
 		}
 	},
 "hooks": [
 	],
 "manualImportLinks": {
-	"\/src\/js\/index.js": [
-		{
-			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/src\/js\/ctaAnimation.js",
-			"position": 0,
-			"type": 1
-			}
-		],
 	"\/src\/js\/logoAnimation.js": [
 		{
 			"followForSyntaxChecking": 0,
@@ -3258,7 +3250,7 @@
 	"displayValue": "dmss",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-angryBaby",
-	"lastBuiltDate": 516699814
+	"lastBuiltDate": 516778689
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
