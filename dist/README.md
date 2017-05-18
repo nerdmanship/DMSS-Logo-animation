@@ -19,7 +19,7 @@ Right click and choose 'save link as...' to save the files:
 * [logoAnimation.min.js](https://github.com/nerdmanship/DMSS-Logo-animation/blob/master/dist/js/logoAnimation.min.js)
 * [buttonAnimation.min.js](https://github.com/nerdmanship/DMSS-Logo-animation/blob/master/dist/js/buttonAnimation.min.js)
 
-** Note ** that these are the only files you need – the scripts create the graphics.
+**Note** that these are the only files you need – the scripts create the graphics.
 
 2. **Add the scripts** on your page:
 
@@ -43,12 +43,13 @@ Right click and choose 'save link as...' to save the files:
 window.addEventListener("load", animateLogo("wrapper", 2));
 
 // The button script takes one argument: the ID of the existing button which is to be animated
-// This button *MUST* have a z-index value
+// This button *MUST* have a z-index value, because the particles will be generated below
 window.addEventListener("load", animateButton("myButton"));
 ```
 
 #### Further information
-You can position and style the div as you would with any normal image wrapper. The logotype will take the dimensions that you give the wrapper.
+* You can position and style the div as you would with any normal image wrapper. The logotype will take the dimensions that you give the wrapper.
+* The button animation script can be initialised on any number of buttons. All buttons will have the same functionality but with uniquely behaving particles.
 
 ## Dependencies
 (Included in logoAnimation.min.js)
