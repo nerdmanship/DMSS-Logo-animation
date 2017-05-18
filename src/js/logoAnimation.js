@@ -1,8 +1,8 @@
 // @codekit-prepend '../assets/js/utility';
 // @codekit-prepend '../assets/js/pubsub';
 
-function animateLogo(id) {
-  o.init(id);
+function animateLogo(id, delay) {
+  o.init(id, delay);
 }
 
 class Particle {
