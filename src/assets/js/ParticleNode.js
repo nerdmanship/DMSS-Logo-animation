@@ -38,40 +38,38 @@ class ParticleNode {
 
   swarm() {
     var p = this;
-    
-    function getVal(target, attr) {
-      
-      var orbit = p.orbit * p.interactionFactor;
-      var acc = p.acc;
-      var current, wave, point;
-
-      if (attr === "x") {
-        current = target._gsTransform.x;
-        wave =  p.sin;
-        point = p.pointX * p.interactionFactor;
-        p.sin += p.speed;
-      } else if (attr === "y") {
-        current = target._gsTransform.y;
-        wave = p.cos;
-        point = p.pointY * p.interactionFactor;
-        p.cos += p.speed;
-      }
-            
-      var dest = orbit * Math.sin(wave) + point;
-      var newVal = current + (dest - current) * acc;
-      
-      return newVal;
-    }
-    
 
     TweenMax.to(this.target, 1, { x: 1, y: 1, scaleX: 1, scaleY: 1, transformOrigin: "center", repeat: -1, modifiers: {
-      x: function(x, target) { return getVal(target, "x"); },
-      y: function(y, target) { return getVal(target, "y"); },
+      x: function(x, target) { return p.getVal(target, "x"); },
+      y: function(y, target) { return p.getVal(target, "y"); },
       scaleX: function() { return Math.cos(p.cos); },
       scaleY: function() { return Math.cos(p.cos); }
     }});
 
   }
 
+  getVal(target, attr) {
+
+        var orbit = this.orbit * this.interactionFactor;
+        var acc = this.acc;
+        var current, wave, point;
+
+        if (attr === "x") {
+          current = target._gsTransform.x;
+          wave =  this.sin;
+          point = this.pointX * this.interactionFactor;
+          this.sin += this.speed;
+        } else if (attr === "y") {
+          current = target._gsTransform.y;
+          wave = this.cos;
+          point = this.pointY * this.interactionFactor;
+          this.cos += this.speed;
+        }
+              
+        var dest = orbit * Math.sin(wave) + point;
+        var newVal = current + (dest - current) * acc;
+        
+        return newVal;
+      }
 }
 
